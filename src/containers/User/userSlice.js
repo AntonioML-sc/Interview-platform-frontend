@@ -1,6 +1,7 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+import jwt from 'jwt-decode';
 
 export const userSlice = createSlice({
     name: 'user',
