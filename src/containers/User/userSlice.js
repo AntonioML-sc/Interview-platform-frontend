@@ -1,5 +1,6 @@
 
-import { createSlice } from '@reduxjs/toolkit/dist/createSlice';
+import { createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 export const userSlice = createSlice({
     name: 'user',
@@ -35,8 +36,27 @@ export const userSlice = createSlice({
     }
 });
 
-export const registerUser = () => async (dispatch) => {
-
+export const registerUser = (role, lastName, firstName, email, password, phone, title, description) => async (dispatch) => {
+    try {
+        const user = await axios.post('https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/register',
+        {
+            role: role,
+            last_name: lastName,
+            first_name: firstName,
+            email: email,
+            password: password,
+            phone: phone,
+            title: title,
+            description: description
+        });
+        
+        let response = user;
+        if (response.status === 201 || response.status === 200) {
+            dispatch(register(response.data));
+        }
+    } catch (error) {
+        dispatch(logError(error));
+    }
 };
 
 export const loginUser = () => async (dispatch) => {
