@@ -61,8 +61,19 @@ export const registerUser = (role, lastName, firstName, email, password, phone, 
     }
 };
 
-export const loginUser = () => async (dispatch) => {
+export const loginUser = (body) => async (dispatch) => {
+    try {
+        const user = await axios.post('https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/login', body);
 
+        let decode = jwt(user.data.token);
+
+        if (user.status === 200) {
+            dispatch(login({...decode, token: user.data.token}));
+        }
+
+    } catch (error) {
+        dispatch(logError(error));
+    }
 };
 
 export const { register, login, logout, logError } = userSlice.actions;
