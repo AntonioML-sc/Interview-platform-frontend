@@ -2,11 +2,13 @@
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { userData, registerUser } from "../userSlice"
-import "./Register.scss"
 import { evalField } from "../../../utils"
+import { useNavigate } from "react-router-dom"
+import "./Register.scss"
 
 const Register = (props) => {
    const dispatch = useDispatch()
+   const navigate = useNavigate()
    const userInfo = useSelector(userData)
 
    const [register, setRegister] = useState({
@@ -58,18 +60,18 @@ const Register = (props) => {
          if (!evalField(validations[index][0], validations[index][1])) {
             setRegisterError(true, validations[index][2])
             return
-         } else if (index == validations.length - 1) {            
+         } else if (index == validations.length - 1) {
             setRegisterError(false, '')
             dispatch(registerUser(register.role, register.lastName, register.firstName, register.email, register.password, register.phone, register.title, register.description))
+            setTimeout(() => navigate("/"), 3000)
          }
-      }   
+      }
    }
 
    return (
       <div id="Register">
          <div className="mainBox">
             <p>Create new account</p>
-
             <form onSubmit={userRegister}>
                <div className="registerItem">
                   <label className="registerLabel">Role</label>
@@ -115,10 +117,8 @@ const Register = (props) => {
                   <button className="registerSubmit" type="submit">Register</button>
                </div>
             </form>
-
             <p className="errorMessage">{register.isError ? register.message : ''}</p>
             <p className="errorMessage">{userInfo.isError ? userInfo.errorMessage : userInfo.successMessage}</p>
-
          </div>
       </div>
    )
