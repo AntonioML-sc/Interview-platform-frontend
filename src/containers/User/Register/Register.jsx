@@ -3,6 +3,7 @@ import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { userData, registerUser } from "../userSlice"
 import "./Register.scss"
+import { evalField } from "../../../utils"
 
 const Register = (props) => {
    const dispatch = useDispatch()
@@ -30,16 +31,38 @@ const Register = (props) => {
    }
 
    // test if the info stored in hook is correct and register user in that case
-   const userRegister = (event) => {
+   const userRegister = async (event) => {
       event.preventDefault()
 
-      setRegister({
-         ...register,
-         isError: false,
-         message: ''
-      })
+      // function to set an error with custon message in register hook
+      const setRegisterError = (value, message) => {
+         setRegister({
+            ...register,
+            isError: value,
+            message: message
+         });
+      }
 
-      dispatch(registerUser(register.role, register.lastName, register.firstName, register.email, register.password, register.phone, register.title, register.description))
+      // form inputs to validate
+      const validations = [
+         ['last_name', register.lastName, 'Introduce a valid last name'],
+         ['first_name', register.firstName, 'Introduce a valid first name'],
+         ['email', register.email, 'Invalid email format'],
+         ['password', register.password, 'Password must be at least 8 characters long and include a letter, a capital letter, a number and a special character'],
+         ['phone', register.phone, 'Invalid phone format'],
+         ['title', register.title, 'Invalid title format'],
+      ]
+
+      // apply evals and register user if everything is ok
+      for (let index in validations) {
+         if (!evalField(validations[index][0], validations[index][1])) {
+            setRegisterError(true, validations[index][2])
+            return
+         } else if (index == validations.length - 1) {            
+            setRegisterError(false, '')
+            dispatch(registerUser(register.role, register.lastName, register.firstName, register.email, register.password, register.phone, register.title, register.description))
+         }
+      }   
    }
 
    return (
