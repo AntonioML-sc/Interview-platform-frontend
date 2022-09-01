@@ -53,7 +53,7 @@ const Login = () => {
          } else if (index == validations.length - 1) {
             setLoginError(false, '')
             dispatch(loginUser({
-               email: credentials.email.toLowerCase,
+               email: credentials.email,
                password: credentials.password
             }))
             setTimeout(() => navigate("/"), 1000)
