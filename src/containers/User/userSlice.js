@@ -13,7 +13,8 @@ export const userSlice = createSlice({
                 ...state,
                 ...action.payload,
                 isError: false,
-                successMessage: 'User registered successfully'
+                successMessage: 'User registered successfully',
+                errorMessage: ''
             }
         },
         login: (state, action) => {
@@ -31,7 +32,8 @@ export const userSlice = createSlice({
             return {
                 ...state,
                 isError: !action.payload.success,
-                errorMessage: action.payload.message
+                errorMessage: action.payload.message,
+                successMessage: '',
             }
         }
     }
@@ -53,7 +55,7 @@ export const registerUser = (role, lastName, firstName, email, password, phone, 
 
         let response = user;
         if (response.status === 201 || response.status === 200) {
-            let data = response.data.user
+            let data = response.data.user;
             dispatch(register({ data, token: user.data.token }));
         }
     } catch (error) {
