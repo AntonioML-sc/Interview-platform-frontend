@@ -1,21 +1,9 @@
-
-#Header{
+#Header {
     width: 100vw;
     height: 10vh;
     background-color: darkgrey;
 
-    .mainBox{
-        height: 100%;
-        background-color: bisque;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        p{
-            font-size: 1em;
-            color: white;
-            font-weight: bold;
-            background-color: rgb(1, 82, 82);
-        }
+    .black {
+        background-color: black;
     }
 }
