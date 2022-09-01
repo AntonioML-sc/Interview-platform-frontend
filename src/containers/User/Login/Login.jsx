@@ -2,6 +2,7 @@
 import { useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { evalField } from "../../../utils"
 import { loginUser, userData } from "../userSlice"
 import "./Login.scss"
 
@@ -10,7 +11,10 @@ const Login = () => {
       email: '',
       password: ''
    })
-   const [msgError, setMsgError] = useState("")
+   const [msgError, setMsgError] = useState({
+      isError: false,
+      message: ''
+   })
    const userInfo = useSelector(userData)
    const dispatch = useDispatch()
    const navigate = useNavigate()
@@ -27,22 +31,40 @@ const Login = () => {
    const userLogin = (event) => {
       event.preventDefault()
 
-      setMsgError('')
+      // function to set an error with custon message in msgError hook
+      const setLoginError = (value, message) => {
+         setMsgError({
+            isError: value,
+            message: message
+         });
+      }
 
-      dispatch(loginUser({
-         email: credentials.email,
-         password: credentials.password
-      }))
+      // form inputs to validate
+      const validations = [
+         ['email', credentials.email, 'Invalid email format'],
+         ['password', credentials.password, 'Password must be at least 8 characters long and include a letter, a capital letter, a number and a special character']
+      ]
 
-      setTimeout(() => {
-         navigate("/")
-      }, 1000)
+      // apply validations and login user if everything is ok
+      for (let index in validations) {
+         if (!evalField(validations[index][0], validations[index][1])) {
+            setLoginError(true, validations[index][2])
+            return
+         } else if (index == validations.length - 1) {
+            setLoginError(false, '')
+            dispatch(loginUser({
+               email: credentials.email,
+               password: credentials.password
+            }))
+            setTimeout(() => navigate("/"), 1000)
+         }
+      }
    }
 
    return (
       <div id="Login">
          <div className="mainBox">
-            <p>Login</p>            
+            <p>Login</p>
             <form onSubmit={userLogin}>
                <div className="loginItem">
                   <label className="loginLabel">Email</label>
@@ -58,8 +80,7 @@ const Login = () => {
                   <button className="loginSubmit" type="submit">Login</button>
                </div>
             </form>
-            
-            <p className="errorMessage">{msgError}</p>
+            <p className="errorMessage">{msgError.isError ? msgError.message : ''}</p>
             <p className="errorMessage">{userInfo.isError ? userInfo.errorMessage : userInfo.successMessage}</p>
          </div>
       </div>
