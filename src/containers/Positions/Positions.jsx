@@ -12,8 +12,9 @@ const Positions = () => {
 
    // data related to positions search
    let [searchData, setSearchData] = useState({
-      searchWord: "Valencia"
-   }) 
+      searchWord: "",
+      myTimeOut: 0
+   })
 
    // updates positionsList (redux) and view depending on the search word
    useEffect(() => {
@@ -25,7 +26,7 @@ const Positions = () => {
                      dispatch(setPositionsList(resp.data.data))
                   }).catch((error) => {
                      dispatch(setPositionsList([]))
-                  })               
+                  })
             } else {
                await axios.get(`https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/positions/get-by-keyword/${searchData.searchWord}`)
                   .then(resp => {
@@ -41,10 +42,30 @@ const Positions = () => {
       fetchPositions()
    }, [searchData.searchWord])
 
+   const handleChange = (event) => {
+      if (searchData.myTimeOut != 0) {
+         clearInterval(searchData.myTimeOut)
+      }
+      setSearchData({
+         ...searchData,
+         myTimeOut: setTimeout(() => {
+            setSearchData({
+               ...searchData,
+               searchWord: event.target.value,
+               myTimeOut: 0
+            })
+         }, 500)
+      })
+   }
 
-   return(
+   return (
       <div id="Positions">
          <div className="mainBox">
+            <div className="searchBar">
+               <form className="searchBarForm">
+                  <input className="inputBox" type="text" name="searchWord" onChange={handleChange} placeholder=" Search"></input>
+               </form>
+            </div>
             <p>POSITIONS PAGE</p>
          </div>
       </div>
