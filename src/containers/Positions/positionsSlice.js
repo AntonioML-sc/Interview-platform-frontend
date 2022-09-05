@@ -10,15 +10,15 @@ export const positionsSlice = createSlice({
         setPosition: (state, action) => {
             state.position = action.payload
         },
-        setPositionList: (state, action) => {
+        setPositionsList: (state, action) => {
             state.positionsList = action.payload
         }
     }
 })
 
-export const { setPosition, setPositionList } = positionsSlice.actions
+export const { setPosition, setPositionsList } = positionsSlice.actions
 
 export const selectPosition = (state) => state.positions.position
-export const selectPositionList = (state) => state.positions.positionsList
+export const selectPositionsList = (state) => state.positions.positionsList
 
 export default positionsSlice.reducer
