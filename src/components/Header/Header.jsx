@@ -1,15 +1,23 @@
 
-import React from "react"
-import { userData } from "../../containers/User/userSlice"
-import { useSelector } from "react-redux"
+// import React from "react"
+import { logout, userData } from "../../containers/User/userSlice"
+import { useDispatch, useSelector } from "react-redux"
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import "./Header.scss"
 
 const Header = () => {
    const userInfo = useSelector(userData)
+   const dispatch = useDispatch()
+   const navigate = useNavigate()
+
+   // Log out and go to home page
+   function getOut() {
+      dispatch(logout())
+      navigate("/")
+   }
 
    return (
       <Navbar collapseOnSelect id="Header" className="text-white m-0 p-0" expand="md" variant="dark">
@@ -29,6 +37,7 @@ const Header = () => {
                {userInfo?.data &&
                   <Nav>
                      <Nav.Link as={Link} to="/profile" className="text-white mx-2" >My Profile</Nav.Link>
+                     <button id="logOutButton" onClick={getOut}>Log out</button>
                   </Nav>
                }
             </Navbar.Collapse>
