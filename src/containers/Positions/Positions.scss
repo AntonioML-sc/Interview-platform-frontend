@@ -38,11 +38,14 @@
          }
       }
 
-      p {
-         font-size: 2em;
-         color: white;
-         font-weight: bold;
-         background-color: rgb(1, 82, 82);
+      .positionsList {         
+         background-color: lightgrey;
+         display: flex;
+         flex-direction: column;
+         width: 90vw;
+         height: 70vh;
+         align-items: center;
+         justify-content: center;
       }
    }
 }

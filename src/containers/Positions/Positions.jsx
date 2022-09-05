@@ -5,6 +5,7 @@ import axios from "axios"
 import "./Positions.scss"
 import { useSelector, useDispatch } from "react-redux"
 import { selectPositionsList, setPositionsList } from "./positionsSlice"
+import PositionCard from "../../components/PositionCard/PositionCard"
 
 const Positions = () => {
    const dispatch = useDispatch()
@@ -58,6 +59,26 @@ const Positions = () => {
       })
    }
 
+   // render a position card for each position stored in positionsList in redux slice
+   const PositionsList = () => {
+      if (positionsList.length > 0) {
+         console.log(positionsList)
+         return (
+            positionsList.map((position, index) => (
+               <div key={index}>
+                  <PositionCard data={position}/>
+               </div>
+            ))
+         )
+      } else {
+
+         return (
+            <div></div>
+         )
+      }
+   }
+
+
    return (
       <div id="Positions">
          <div className="mainBox">
@@ -66,7 +87,9 @@ const Positions = () => {
                   <input className="inputBox" type="text" name="searchWord" onChange={handleChange} placeholder=" Search"></input>
                </form>
             </div>
-            <p>POSITIONS PAGE</p>
+            <div className="positionsList">
+               <PositionsList/>
+            </div>
          </div>
       </div>
    )

@@ -1,0 +1,16 @@
+
+.PositionCard {
+    padding: 5px;
+    margin: 5px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid grey;
+    height: 200px;
+    width: 800px;
+    display: flex;
+    flex-direction: column;
+
+    .cardText {
+        color: black;
+    }
+}
