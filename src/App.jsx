@@ -7,6 +7,7 @@ import Register from './containers/User/Register/Register'
 import Profile from './containers/User/Profile/Profile'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
+import PositionDetails from './containers/PositionDetails/PositionDetails'
 
 import './App.scss'
 
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>}/>
           <Route path='/positions' element={<Positions/>}/>
+          <Route path='/position-details' element={<PositionDetails/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/profile' element={<Profile/>}/>
