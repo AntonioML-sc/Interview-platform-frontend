@@ -1,8 +1,10 @@
 
+import axios from "axios"
 import React from "react"
-import { useSelector } from "react-redux"
+import { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { selectPosition } from "../Positions/positionsSlice"
+import { selectPosition, setPosition } from "../Positions/positionsSlice"
 import { userData } from "../User/userSlice"
 import "./PositionDetails.scss"
 
@@ -10,13 +12,90 @@ const PositionDetails = () => {
 	const userInfo = useSelector(userData)
 	const positionInfo = useSelector(selectPosition)
 	const navigate = useNavigate()
-
-	// number of applicants in this position currently (-1 because user admin is also in the list)
-	const applicants = positionInfo?.users.length - 1
+	const dispatch = useDispatch()
+	const adminId = "5695fbbd-4675-4b2a-b31d-603252c21c94"
+	let [data, setData] = useState({
+		lastAction: ""
+	})
 
 	// navigate to positions list view if there is no selected position in redux
 	if (!positionInfo?.title) {
 		navigate('/Positions')
+	}
+
+	// function to check if ther is a logged user and if he/she is already a position admin, an applicant or none of them
+	function userRole(positionUsers, user) {
+		if (!user?.data) {
+			return "no user"
+		} else {
+			for (let index in positionUsers) {
+				if (positionUsers[index].id == user.data.id) {
+					if (positionUsers[index].role_id == adminId) {
+						return "admin"
+					} else {
+						return "applicant"
+					}
+				} else if (index == positionUsers?.length - 1) {
+					return "none"
+				}
+			}
+		}
+	}
+
+	let userInPosition = userRole(positionInfo.users, userInfo)
+
+	useEffect(() => {
+		const fetchPosition = async () => {
+			await axios.get(`https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/positions/get-by-id/${positionInfo?.id}`)
+				.then(resp => {
+					dispatch(setPosition(resp.data.data))
+				}).then(resp => {
+					userInPosition = userRole(positionInfo.users, userInfo)
+				}).catch(error => {
+					console.log(error)
+				})
+		}
+		fetchPosition()
+	}, [data.lastAction])
+
+	// number of applicants in this position currently (-1 because user admin is also in the list)
+	const applicants = positionInfo?.users.length - 1
+
+	// handler to apply for a position
+	const applyForPosition = async (event) => {
+		const config = {
+			headers: { "Authorization": `Bearer ${userInfo.token}` }
+		}
+		const body = {
+			"position_id": positionInfo.id
+		}
+		console.log("body: " + body)
+		await axios.post('https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/applications/apply', body, config)
+			.then(resp => {
+				setData({
+					...data,
+					lastAction: "applied"
+				})
+			}).catch(error => {
+				console.log(error)
+			})
+	}
+
+	const ActionsLine = () => {
+		switch (userInPosition) {
+			case "admin":
+
+				return (<div><p className="msgText">- You are the admin of this position -</p></div>)
+			case "applicant":
+
+				return (<div><p className="msgText">- You have already applied for this position -</p></div>)
+			case "none":
+
+				return (<div><button id="detailsButton" onClick={applyForPosition}>Apply</button></div>)
+			default:
+
+				return (<div></div>)
+		}
 	}
 
 	return (
@@ -25,6 +104,7 @@ const PositionDetails = () => {
 				<p className="cardTitle">{positionInfo.title}</p>
 				<p className="cardCompany">{positionInfo.company.name.toUpperCase()}</p>
 				<p className="cardText"><strong>Publication date: </strong>{new Date(positionInfo.created_at).toLocaleDateString()}</p>
+				<ActionsLine />
 				<p className="cardText"><strong>Number of applicants: </strong>{applicants}</p>
 				<p className="cardText"><strong>Location: </strong>{positionInfo.location}</p>
 				<p className="cardText"><strong>Mode: </strong>{positionInfo.mode}</p>

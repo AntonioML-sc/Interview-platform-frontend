@@ -13,8 +13,7 @@
         flex-direction: column;
         max-width: 90vw;
         min-width: 60vw;
-        border-radius: 5px;
-
+        border-radius: 1em;
 
         .cardTitle {
             color: rgb(75, 75, 233);
@@ -33,6 +32,25 @@
         .cardText {
             color: black;
             margin: 2px 2em 2px 2em;
+        }
+        
+        .msgText {
+            color: rgb(75, 75, 233);
+            margin: 2px 2em 2px 2em;
+        }
+
+        #detailsButton {
+            background-color: sandybrown;
+            border: solid 1px grey;
+            width: fit-content;
+            padding: 2px 5px;
+            margin: 5px 2em;
+            border-radius: 5px;
+        }
+    
+        #detailsButton:hover {
+            background-color: red;
+            font-weight: bold;
         }
     }
 }
