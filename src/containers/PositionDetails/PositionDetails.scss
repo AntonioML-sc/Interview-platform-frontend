@@ -52,5 +52,22 @@
             background-color: red;
             font-weight: bold;
         }
+
+        .skillContainer {            
+            margin: 2px 2em 2px 2em;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+
+            .skillTag {
+                background-color: rgb(178, 231, 252);
+                color: black;
+                border: 1px solid rgb(75, 75, 233);
+                border-radius: 1em;
+                padding: 1px 8px;
+                margin: 3px 5px;
+                width: fit-content;
+            }
+        }        
     }
 }

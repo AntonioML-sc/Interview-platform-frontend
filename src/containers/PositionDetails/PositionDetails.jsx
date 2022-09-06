@@ -69,7 +69,6 @@ const PositionDetails = () => {
 		const body = {
 			"position_id": positionInfo.id
 		}
-		console.log("body: " + body)
 		await axios.post('https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/applications/apply', body, config)
 			.then(resp => {
 				setData({
@@ -81,6 +80,7 @@ const PositionDetails = () => {
 			})
 	}
 
+	// renders a button to apply for the position or a message if logged user is the admin or already applied
 	const ActionsLine = () => {
 		switch (userInPosition) {
 			case "admin":
@@ -98,6 +98,17 @@ const PositionDetails = () => {
 		}
 	}
 
+	// renders the list of required skills
+	const SkillList = () => {
+		if (positionInfo.skills.length > 0) {
+			return (
+				positionInfo.skills.map((skill, index) => (
+					<p className="skillTag">{skill.title}</p>
+				))
+			)
+		}
+	}
+
 	return (
 		<div id="PositionDetails">
 			<div className="positionTextBox">
@@ -109,6 +120,10 @@ const PositionDetails = () => {
 				<p className="cardText"><strong>Location: </strong>{positionInfo.location}</p>
 				<p className="cardText"><strong>Mode: </strong>{positionInfo.mode}</p>
 				<p className="cardText"><strong>Salary: </strong>{positionInfo.salary}</p>
+				<p className="cardText"><strong>REQUIRED SKILLS:</strong></p>
+				<div className="skillContainer">
+					<SkillList />
+				</div>
 				<p className="cardText"><strong>DESCRIPTION:</strong></p>
 				<p className="cardText">{positionInfo.description}</p>
 				<p className="cardText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, ipsum consectetur distinctio ullam harum nostrum ducimus quod quo omnis incidunt quas ut, sint, error quia maiores magni. Consequuntur eum assumenda molestiae nobis excepturi fugit, saepe aperiam dicta inventore doloremque facere accusantium, laudantium ipsam et autem dignissimos, velit odit? Asperiores, veniam? Provident nostrum sunt suscipit blanditiis, voluptas in ipsam adipisci laboriosam consequuntur, eum fugiat, dolores rem optio aperiam doloremque aliquam natus labore maxime perspiciatis? Assumenda in voluptatem a corrupti quas id. Nostrum, facilis dicta? Consequatur est magni dolorum quibusdam magnam. Explicabo pariatur facere omnis minus corporis neque maiores officiis cum ipsa.</p>
