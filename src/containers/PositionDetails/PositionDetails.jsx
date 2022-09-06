@@ -13,13 +13,15 @@ const PositionDetails = () => {
 
 	if (!positionInfo?.data) {
 		navigate('/Positions')
-	} else {
-		return (
-			<div>
+	}
+
+	return (
+		<div id="PositionDetails">
+			<div className="wellcomeMessageBox">
 				<p>POSITION DETAILS</p>
 			</div>
-		)
-	}
+		</div>
+	)
 }
 
 export default PositionDetails

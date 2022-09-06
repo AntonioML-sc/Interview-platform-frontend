@@ -1,11 +1,16 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { setPosition } from "../../containers/Positions/positionsSlice";
 import './PositionCard.scss'
 
 const PositionCard = (props) => {
-    console.log(props.data)
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const goToPosition = () => {
-        return
+        dispatch(setPosition(props.data))
+        navigate('/position-details')
     }
 
     return (
