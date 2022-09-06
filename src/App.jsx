@@ -8,6 +8,7 @@ import Profile from './containers/User/Profile/Profile'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import PositionDetails from './containers/PositionDetails/PositionDetails'
+import CreatePosition from './containers/CreatePosition/CreatePosition'
 
 import './App.scss'
 
@@ -21,6 +22,7 @@ function App() {
           <Route path='/' element={<Home/>}/>
           <Route path='/positions' element={<Positions/>}/>
           <Route path='/position-details' element={<PositionDetails/>}/>
+          <Route path='/position-create' element={<CreatePosition/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/profile' element={<Profile/>}/>

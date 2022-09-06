@@ -12,6 +12,7 @@ const Header = () => {
    const userInfo = useSelector(userData)
    const dispatch = useDispatch()
    const navigate = useNavigate()
+   const recruiterRoleId = "5695fbbd-4675-4b2a-b31d-603252c21c94"
 
    // Log out and go to home page
    function getOut() {
@@ -36,6 +37,9 @@ const Header = () => {
                }
                {userInfo?.data &&
                   <Nav>
+                     {userInfo?.data.role_id == recruiterRoleId &&
+                        <Nav.Link as={Link} to="/position-create" className="text-white mx-2" >Create Position</Nav.Link>
+                     }
                      <Nav.Link as={Link} to="/profile" className="text-white mx-2" >My Profile</Nav.Link>
                      <button id="logOutButton" onClick={getOut}>Log out</button>
                   </Nav>
