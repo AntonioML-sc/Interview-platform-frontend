@@ -1,21 +1,38 @@
-
-#PositionDetails{
+#PositionDetails {
     width: 100vw;
     height: 80vh;
-    background-color: darkgrey;
+    background-color: rgb(255, 233, 207);
+    display: flex;
+    justify-content: center;
 
-    .wellcomeMessageBox{
+    .positionTextBox {
+        margin: 0.5em;
         height: 100%;
-        background-color: aquamarine;
+        background-color: white;
         display: flex;
-        align-items: center;
-        justify-content: center;
+        flex-direction: column;
+        max-width: 90vw;
+        min-width: 60vw;
+        border-radius: 5px;
 
-        p{
-            font-size: 2em;
-            color: white;
+
+        .cardTitle {
+            color: rgb(75, 75, 233);
             font-weight: bold;
-            background-color: rgb(1, 82, 82);
+            font-size: 1.4em;
+            margin: 2px 2em 2px 2em;
+        }
+
+        .cardCompany {
+            color: black;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin: 2px 2em 2px 2em;
+        }
+
+        .cardText {
+            color: black;
+            margin: 2px 2em 2px 2em;
         }
     }
 }
