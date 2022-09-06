@@ -19,9 +19,11 @@ const PositionDetails = () => {
 	})
 
 	// navigate to positions list view if there is no selected position in redux
-	if (!positionInfo?.title) {
-		navigate('/Positions')
-	}
+	useEffect(() => {
+		if (!positionInfo?.title) {
+			navigate('/Positions')
+		}
+	}, [])
 
 	// function to check if ther is a logged user and if he/she is already a position admin, an applicant or none of them
 	function userRole(positionUsers, user) {
@@ -44,6 +46,7 @@ const PositionDetails = () => {
 
 	let userInPosition = userRole(positionInfo.users, userInfo)
 
+	// update position in slice after an action that could have changed it
 	useEffect(() => {
 		const fetchPosition = async () => {
 			await axios.get(`https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/positions/get-by-id/${positionInfo?.id}`)
@@ -92,6 +95,9 @@ const PositionDetails = () => {
 			case "none":
 
 				return (<div><button id="detailsButton" onClick={applyForPosition}>Apply</button></div>)
+			case "no user":
+
+				return (<div><p className="msgText">- Log in or register to apply for this position -</p></div>)
 			default:
 
 				return (<div></div>)
