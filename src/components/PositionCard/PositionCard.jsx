@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { setPosition } from "../../containers/Positions/positionsSlice";
+import { setPosition } from "../../containers/Position/positionsSlice";
 import './PositionCard.scss'
 
 const PositionCard = (props) => {

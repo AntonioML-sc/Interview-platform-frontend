@@ -1,14 +1,14 @@
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from "./containers/Home/Home"
-import Positions from './containers/Positions/Positions'
 import Login from './containers/User/Login/Login'
 import Register from './containers/User/Register/Register'
 import Profile from './containers/User/Profile/Profile'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
-import PositionDetails from './containers/PositionDetails/PositionDetails'
-import CreatePosition from './containers/CreatePosition/CreatePosition'
+import Positions from './containers/Position/Positions/Positions'
+import PositionDetails from './containers/Position/PositionDetails/PositionDetails'
+import CreatePosition from './containers/Position/CreatePosition/CreatePosition'
 
 import './App.scss'
 

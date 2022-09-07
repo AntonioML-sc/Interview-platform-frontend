@@ -4,8 +4,8 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import "./Positions.scss"
 import { useSelector, useDispatch } from "react-redux"
-import { selectPositionsList, setPositionsList } from "./positionsSlice"
-import PositionCard from "../../components/PositionCard/PositionCard"
+import { selectPositionsList, setPositionsList } from "../positionsSlice"
+import PositionCard from "../../../components/PositionCard/PositionCard"
 
 const Positions = () => {
    const dispatch = useDispatch()
