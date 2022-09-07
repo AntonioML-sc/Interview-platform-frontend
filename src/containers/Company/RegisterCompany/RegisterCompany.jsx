@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { evalField } from "../../../utils";
 import { userData } from "../../User/userSlice";
-import { selectCompany } from "../companySlice";
+import { registerCompany, selectCompany } from "../companySlice";
 import './RegisterCompany.scss'
 
 const RegisterCompany = () => {
@@ -36,7 +37,37 @@ const RegisterCompany = () => {
 
    // test if the info stored is correct and register company in that case
    const companyRegister = async (event) => {
-      return
+      event.preventDefault()
+
+        // function to set an error with custon message in register hook
+        const setRegisterError = (value, message) => {
+            setRegister({
+                ...register,
+                isError: value,
+                message: message
+            });
+        }
+
+        // form inputs to validate
+        const validations = [
+            ['name', register.name, 'Invalid name format'],
+            ['address', register.address, 'Invalid address format'],
+            ['email', register.email, 'Invalid email format'],
+            ['description', register.description, 'Invalid description format']
+        ]
+
+        // apply evals and register position if everything is ok
+        for (let index in validations) {
+            if (!evalField(validations[index][0], validations[index][1])) {
+                setRegisterError(true, validations[index][2])
+                return
+            } else if (index == validations.length - 1) {
+                setRegisterError(false, '')
+                const userToken = userInfo?.token
+                dispatch(registerCompany(register.name, register.address, register.email, register.description, userToken))
+                setTimeout(() => navigate("/"), 3000)
+            }
+        }
    }
 
       return (
