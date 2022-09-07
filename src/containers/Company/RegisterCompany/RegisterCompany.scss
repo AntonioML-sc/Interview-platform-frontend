@@ -1,17 +1,18 @@
 
-#RegisterCompany{
+#RegisterCompany {
     width: 100vw;
     height: 80vh;
     background-color: darkgrey;
 
-    .wellcomeMessageBox{
+    .mainBox {
         height: 100%;
         background-color: aquamarine;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
 
-        p{
+        p {
             font-size: 2em;
             color: white;
             font-weight: bold;
