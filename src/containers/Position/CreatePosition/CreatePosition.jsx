@@ -1,15 +1,16 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { evalField } from "../../../utils";
 import { userData } from "../../User/userSlice";
-import { registerPosition } from "../positionsSlice";
+import { registerPosition, selectPosition } from "../positionsSlice";
 import './CreatePosition.scss'
 
 const CreatePosition = () => {
     const userInfo = useSelector(userData)
+    const positionsInfo = useSelector(selectPosition)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const recruiterRoleId = "5695fbbd-4675-4b2a-b31d-603252c21c94"
@@ -69,7 +70,8 @@ const CreatePosition = () => {
                 return
             } else if (index == validations.length - 1) {
                 setRegisterError(false, '')
-                dispatch(registerPosition(register.title, register.description, register.companyName, register.location, register.mode, register.salary))
+                const userToken = userInfo?.token
+                dispatch(registerPosition(register.title, register.description, register.companyName, register.location, register.mode, register.salary, userToken))
                 setTimeout(() => navigate("/"), 3000)
             }
         }
@@ -77,8 +79,45 @@ const CreatePosition = () => {
 
     return (
         <div id="CreatePosition">
-            <div className="wellcomeMessageBox">
-                <p>CREATE POSITION PAGE</p>
+            <div className="mainBox">
+                <p>Create new position</p>
+                <form onSubmit={positionRegister}>
+                    <div className="registerItem">
+                        <label className="registerLabel">Title</label>
+                        <input className="registerInput" onChange={handleInput} type="text" name="title" />
+                    </div>
+
+                    <div className="registerItem">
+                        <label className="registerLabel">Company name</label>
+                        <input className="registerInput" onChange={handleInput} type="text" name="companyName" />
+                    </div>
+
+                    <div className="registerItem">
+                        <label className="registerLabel">Location</label>
+                        <input className="registerInput" onChange={handleInput} type="text" name="location" />
+                    </div>
+
+                    <div className="registerItem">
+                        <label className="registerLabel">Mode</label>
+                        <input className="registerInput" onChange={handleInput} type="text" name="mode" />
+                    </div>
+
+                    <div className="registerItem">
+                        <label className="registerLabel">Salary</label>
+                        <input className="registerInput" onChange={handleInput} type="text" name="salary" />
+                    </div>
+
+                    <div className="registerItem">
+                        <label className="registerLabel">Description</label>
+                        <input className="registerInput" onChange={handleInput} type="text" name="description" />
+                    </div>
+
+                    <div className="registerItem">
+                        <button className="registerSubmit" type="submit">Register</button>
+                    </div>
+                </form>
+                <p className="errorMessage">{register.isError ? register.message : ''}</p>
+                <p className="errorMessage">{positionsInfo.isError ? positionsInfo.errorMessage : positionsInfo.successMessage}</p>
             </div>
         </div>
     )
