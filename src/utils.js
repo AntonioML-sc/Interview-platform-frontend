@@ -22,7 +22,7 @@ const evalName = (st) => {
 }
 
 const evalTitle = (st) => {
-    return /^[a-zA-Z\u00C0-\u00FF \d.,?!:@%&+'\$*\-]+$/.test(st);
+    return /^[a-zA-Z\u00C0-\u00FF \d.,?!:@%&+'\$*\-\€]+$/.test(st);
 }
 
 const evalAddress = (st) => {
@@ -55,6 +55,10 @@ const evalField = (key, value) => {
         case 'description': return true;
         case 'mark': return evalMark(value);
         case 'date': return evalDate(value);
+        case 'salary': return evalTitle(value);
+        case 'company_name': return evalName(value);
+        case 'location': return evalTitle(value);
+        case 'mode': return evalTitle(value);
         default: return false;
     }
 }
