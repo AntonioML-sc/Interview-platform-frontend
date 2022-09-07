@@ -1,15 +1,18 @@
 #Positions {
    width: 100vw;
-   height: 80vh;
+   min-height: 80vh;
+   height: auto;
    background-color: darkgrey;
+   display: flex;
+   flex-direction: column;
 
    .mainBox {
-      height: 100%;
+      height: auto;
       background-color: aquamarine;
       display: flex;
-      align-items: center;
-      justify-content: top;
       flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
 
       .searchBar {
          background-color: lightgrey;
@@ -40,12 +43,16 @@
 
       .positionsList {         
          background-color: lightgrey;
+         border-radius: 1em;
          display: flex;
          flex-direction: column;
          width: 90vw;
-         height: 70vh;
+         min-height: 75vh;
+         height: auto;
+         margin: 1em;
+         padding: 0.5em;
          align-items: center;
-         justify-content: center;
+         justify-content: flex-start;
       }
    }
 }
