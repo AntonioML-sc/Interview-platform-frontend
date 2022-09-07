@@ -9,10 +9,10 @@ export const skillSlice = createSlice({
    },
    reducers: {
       setSkill: (state, action) => {
-         state.position = action.payload
+         state.skill = action.payload
       },
       setSkillList: (state, action) => {
-         state.position = action.payload
+         state.skillList = action.payload
       },
       register: (state, action) => {
          return {
@@ -42,7 +42,7 @@ export const registerSkill = (title, description, token) => async (dispatch) => 
       const config = {
          headers: { "Authorization": `Bearer ${token}` }
       }
-      const skill = await axios.post('https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/companies/new', body, config);
+      const skill = await axios.post('https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/skills/new', body, config);
 
       let response = skill;
       if (response.status === 201 || response.status === 200) {

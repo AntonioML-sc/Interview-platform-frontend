@@ -22,7 +22,7 @@ const evalName = (st) => {
 }
 
 const evalTitle = (st) => {
-    return /^[a-zA-Z\u00C0-\u00FF \d.,?!:@%&+'\$*\-\€]+$/.test(st);
+    return /^[a-zA-Z\u00C0-\u00FF \d.,?!:@%&+'\$*\-\€#;]+$/.test(st);
 }
 
 const evalAddress = (st) => {
