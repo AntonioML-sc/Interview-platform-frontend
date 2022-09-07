@@ -9,6 +9,7 @@ import Footer from './components/Footer/Footer'
 import Positions from './containers/Position/Positions/Positions'
 import PositionDetails from './containers/Position/PositionDetails/PositionDetails'
 import CreatePosition from './containers/Position/CreatePosition/CreatePosition'
+import RegisterCompany from './containers/Company/RegisterCompany/RegisterCompany'
 
 import './App.scss'
 
@@ -26,6 +27,7 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/register' element={<Register/>}/>
           <Route path='/profile' element={<Profile/>}/>
+          <Route path='/company-register' element={<RegisterCompany/>}/>
         </Routes>
         <Footer/>
       </BrowserRouter>
