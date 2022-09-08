@@ -110,7 +110,7 @@ const CreatePosition = () => {
          }
       }
    }
-   
+
    // handler for skill search
    const handleChange = (event) => {
       if (skillLists.myTimeOut != 0) {
@@ -128,18 +128,34 @@ const CreatePosition = () => {
       })
    }
 
+   // add the clicked skill tag from general skill list to position required skill list
    const addToPositionSkillList = (event, skill) => {
       const check = () => {
 
-         return (skillLists.positionSkillList.every(value => {return value.id != skill.id}))
+         return (skillLists.positionSkillList.every(value => { return value.id != skill.id }))
       }
 
       if (check()) {
          setSkillLists({
             ...skillLists,
             positionSkillList: [...skillLists.positionSkillList, skill]
-         })         
+         })
       }
+   }
+
+   // remove the clicked skill tag from position required skill list
+   const removeFromPositionSkillList = (event, skill) => {
+      let positionSkills = skillLists.positionSkillList
+      for (const key in positionSkills) {
+         if (positionSkills[key].id == skill.id) {
+            positionSkills.splice(key, 1)            
+         }
+      }
+
+      setSkillLists({
+         ...skillLists,
+         positionSkillList: positionSkills
+      })
    }
 
    // ------------ RENDER FUNCTIONS ------------ \\
@@ -168,13 +184,13 @@ const CreatePosition = () => {
       }
    }
 
-   // renders otherSkillList
+   // renders positionSkillList
    const PositionSkillList = () => {
       if (skillLists.positionSkillList.length > 0) {
 
          return (
             skillLists.positionSkillList.map((skill, index) => (
-               <p key={index} className="skillTag">{skill.title}</p>
+               <p key={index} className="skillTag" onClick={event => removeFromPositionSkillList(event, skill)} >{skill.title}</p>
             ))
          )
       } else {
