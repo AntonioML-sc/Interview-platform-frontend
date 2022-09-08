@@ -65,6 +65,8 @@ const CreatePosition = () => {
       fetchSkills()
    }, [skillLists.searchWord])
 
+   // ------------ EVENT HANDLERS ------------ \\
+
    // handler to update hook with info from form fields
    const handleInput = (event) => {
       setRegister({
@@ -73,7 +75,7 @@ const CreatePosition = () => {
       })
    }
 
-   // test if the info stored in hook is correct and register position in that case
+   // handler to test if the info stored in hook is correct and register position in that case
    const positionRegister = async (event) => {
       event.preventDefault()
 
@@ -108,6 +110,39 @@ const CreatePosition = () => {
          }
       }
    }
+   
+   // handler for skill search
+   const handleChange = (event) => {
+      if (skillLists.myTimeOut != 0) {
+         clearInterval(skillLists.myTimeOut)
+      }
+      setSkillLists({
+         ...skillLists,
+         myTimeOut: setTimeout(() => {
+            setSkillLists({
+               ...skillLists,
+               searchWord: event.target.value,
+               myTimeOut: 0
+            })
+         }, 500)
+      })
+   }
+
+   const addToPositionSkillList = (event, skill) => {
+      const check = () => {
+
+         return (skillLists.positionSkillList.every(value => {return value.id != skill.id}))
+      }
+
+      if (check()) {
+         setSkillLists({
+            ...skillLists,
+            positionSkillList: [...skillLists.positionSkillList, skill]
+         })         
+      }
+   }
+
+   // ------------ RENDER FUNCTIONS ------------ \\
 
    // renders otherSkillList
    const OtherSkillList = () => {
@@ -121,7 +156,7 @@ const CreatePosition = () => {
 
             return (
                skillLists.otherSkillList.data.map((skill, index) => (
-                  <p key={index} className="skillTag">{skill.title}</p>
+                  <p key={index} className="skillTag" onClick={event => addToPositionSkillList(event, skill)} >{skill.title}</p>
                ))
             )
          } else {
@@ -148,23 +183,6 @@ const CreatePosition = () => {
             <div></div>
          )
       }
-   }
-
-   // handler for skill search
-   const handleChange = (event) => {
-      if (skillLists.myTimeOut != 0) {
-         clearInterval(skillLists.myTimeOut)
-      }
-      setSkillLists({
-         ...skillLists,
-         myTimeOut: setTimeout(() => {
-            setSkillLists({
-               ...skillLists,
-               searchWord: event.target.value,
-               myTimeOut: 0
-            })
-         }, 500)
-      })
    }
 
    return (
