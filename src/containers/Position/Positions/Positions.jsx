@@ -62,7 +62,6 @@ const Positions = () => {
    // render a position card for each position stored in positionsList in redux slice
    const PositionsList = () => {
       if (positionsList.length > 0) {
-         console.log(positionsList)
          return (
             positionsList.map((position, index) => (
                <div key={index}>

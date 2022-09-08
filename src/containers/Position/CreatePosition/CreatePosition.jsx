@@ -1,6 +1,6 @@
 
-import React, { useState } from "react";
-import { useEffect } from "react";
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { evalField } from "../../../utils";
@@ -15,12 +15,31 @@ const CreatePosition = () => {
     const dispatch = useDispatch()
     const recruiterRoleId = "5695fbbd-4675-4b2a-b31d-603252c21c94"
 
+    // data related to skill search
+    let [skillLists, setSkillLists] = useState({
+        userSkillList: [],
+        otherSkillList: [],
+        searchWord: ""
+    })
+
     useEffect(() => {
-        if (!userInfo?.data) {
-            navigate('/')
-        } else if (userInfo?.data.role_id != recruiterRoleId) {
+        if (!userInfo?.data || userInfo?.data.role_id != recruiterRoleId) {
             navigate('/')
         }
+        const fetchSkills = async () => {
+            await axios.get('https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/skills/get-all')
+                .then(resp => {
+                    setSkillLists({
+                        ...skillLists,
+                        otherSkillList: resp.data
+                    })
+                }).then(resp => {
+                    console.log(skillLists.otherSkillList)
+                }).catch((error) => {
+                    console.log(error)
+                })
+        }
+        fetchSkills()
     }, [])
 
     const [register, setRegister] = useState({
