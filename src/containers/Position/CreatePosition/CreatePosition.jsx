@@ -19,7 +19,8 @@ const CreatePosition = () => {
    let [skillLists, setSkillLists] = useState({
       positionSkillList: [],
       otherSkillList: [],
-      searchWord: ""
+      searchWord: "",
+      myTimeOut: 0
    })
 
    // data to register position
@@ -39,20 +40,30 @@ const CreatePosition = () => {
          navigate('/')
       }
       const fetchSkills = async () => {
-         await axios.get('https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/skills/get-all')
-            .then(resp => {
-               setSkillLists({
-                  ...skillLists,
-                  otherSkillList: resp.data
-               })
-            }).then(resp => {
-               console.log(skillLists.otherSkillList)
-            }).catch((error) => {
-               console.log(error)
-            })
+         try {
+            if (skillLists.searchWord == "") {
+               await axios.get('https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/skills/get-all')
+                  .then(resp => {
+                     setSkillLists({
+                        ...skillLists,
+                        otherSkillList: resp.data
+                     })
+                  })
+            } else {
+               await axios.get(`https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/skills/get-by-title/${skillLists.searchWord}`)
+                  .then(resp => {
+                     setSkillLists({
+                        ...skillLists,
+                        otherSkillList: resp.data
+                     })
+                  })
+            }
+         } catch (error) {
+            console.log(error)
+         }
       }
       fetchSkills()
-   }, [])
+   }, [skillLists.searchWord])
 
    // handler to update hook with info from form fields
    const handleInput = (event) => {
@@ -141,7 +152,19 @@ const CreatePosition = () => {
 
    // handler for skill search
    const handleChange = (event) => {
-      return
+      if (skillLists.myTimeOut != 0) {
+         clearInterval(skillLists.myTimeOut)
+      }
+      setSkillLists({
+         ...skillLists,
+         myTimeOut: setTimeout(() => {
+            setSkillLists({
+               ...skillLists,
+               searchWord: event.target.value,
+               myTimeOut: 0
+            })
+         }, 500)
+      })
    }
 
    return (
@@ -184,7 +207,7 @@ const CreatePosition = () => {
                </div>
 
                <div className="positionSkillList">
-                  <PositionSkillList/>
+                  <PositionSkillList />
                </div>
 
                <div className="registerItem">
@@ -199,7 +222,7 @@ const CreatePosition = () => {
             <div className="otherSkillContainer">
                <div className="searchBar">
                   <form className="searchBarForm">
-                     <input className="inputBox" type="text" name="searchWord" placeholder=" Search"></input>
+                     <input className="inputBox" type="text" name="searchWord" onChange={handleChange} placeholder=" Search"></input>
                   </form>
                </div>
                <div className="otherSkillList">
