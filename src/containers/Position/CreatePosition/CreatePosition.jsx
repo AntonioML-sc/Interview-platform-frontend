@@ -100,15 +100,12 @@ const CreatePosition = () => {
 
    // renders otherSkillList
    const OtherSkillList = () => {
-      if(!skillLists.otherSkillList.data) {
-         
-         console.log("no llega")
+      if (!skillLists.otherSkillList.data) {
+
          return (
             <div></div>
          )
       } else {
-         console.log(skillLists.otherSkillList)
-
          if (skillLists.otherSkillList?.data.length > 0) {
 
             return (
@@ -117,12 +114,28 @@ const CreatePosition = () => {
                ))
             )
          } else {
-   
-            console.log("no mapea")
+
             return (
                <div></div>
             )
          }
+      }
+   }
+
+   // renders otherSkillList
+   const PositionSkillList = () => {
+      if (skillLists.positionSkillList.length > 0) {
+
+         return (
+            skillLists.positionSkillList.map((skill, index) => (
+               <p key={index} className="skillTag">{skill.title}</p>
+            ))
+         )
+      } else {
+
+         return (
+            <div></div>
+         )
       }
    }
 
@@ -168,6 +181,10 @@ const CreatePosition = () => {
 
                <div className="registerItem">
                   <p className="registerLabel">Skills required</p>
+               </div>
+
+               <div className="positionSkillList">
+                  <PositionSkillList/>
                </div>
 
                <div className="registerItem">

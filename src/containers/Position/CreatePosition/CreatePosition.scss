@@ -11,6 +11,31 @@
       align-items: center;
       justify-content: center;
 
+      .positionSkillList {
+         background-color: grey;
+         display: flex;
+         flex-direction: row;
+         flex-wrap: wrap;
+         overflow: hidden;
+         max-width: 90vw;
+         max-height: 15vh;
+         height: auto;
+         margin: 1em;
+         padding: 0.5em;
+         align-items: center;
+         justify-content: flex-start;
+
+         .skillTag {
+            background-color: rgb(178, 231, 252);
+            color: black;
+            border: 1px solid rgb(75, 75, 233);
+            border-radius: 1em;
+            padding: 1px 8px;
+            margin: 3px 5px;
+            width: fit-content;
+         }
+      }
+
       .otherSkillContainer {
          background-color: lightgrey;
          display: flex;
@@ -54,7 +79,7 @@
             padding: 0.5em;
             align-items: center;
             justify-content: flex-start;
-            
+
             .skillTag {
                background-color: rgb(178, 231, 252);
                color: black;
@@ -63,7 +88,7 @@
                padding: 1px 8px;
                margin: 3px 5px;
                width: fit-content;
-           }
+            }
          }
       }
    }
