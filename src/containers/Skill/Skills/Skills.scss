@@ -1,21 +1,59 @@
 
 #Skills{
     width: 100vw;
-    height: 80vh;
+    min-height: 80vh;
+    height: auto;
     background-color: darkgrey;
+    display: flex;
+    flex-direction: column;
 
-    .wellcomeMessageBox{
-        height: 100%;
-        background-color: aquamarine;
+    .mainBox {
+        height: auto;
+        background-color: white;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
-
-        p{
-            font-size: 2em;
-            color: white;
-            font-weight: bold;
-            background-color: rgb(1, 82, 82);
+        justify-content: flex-start;
+  
+        .searchBar {
+           background-color: lightgrey;
+           text-align: center;
+           display: flex;
+           flex-direction: row;
+           align-items: center;
+           justify-content: center;
+           height: 5vh;
+           width: 100vw;
+  
+           .searchBarForm {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              justify-content: center;
+              margin-right: 2em;
+  
+              .inputBox {
+                 border-color: grey;
+                 color: black;
+                 background-color: white;
+                 width: 15em;
+                 height: 1.5em;
+              }
+           }
         }
-    }
+  
+        .skillsList {         
+           background-color: rgb(178, 231, 252);
+           border-radius: 1em;
+           display: flex;
+           flex-direction: column;
+           width: 90vw;
+           min-height: 75vh;
+           height: auto;
+           margin: 1em;
+           padding: 0.5em;
+           align-items: center;
+           justify-content: flex-start;
+        }
+     }
 }
