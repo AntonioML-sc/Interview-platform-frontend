@@ -1,0 +1,23 @@
+.SkillCard {
+   padding: 5px;
+   margin: 3px;
+   background-color: rgb(255, 233, 207);
+   border-radius: 5px;
+   border: 1px solid grey;
+   height: auto;
+   width: 800px;
+   display: flex;
+   flex-direction: column;
+
+   .cardTitle {
+      color: rgb(75, 75, 233);
+      font-weight: bold;
+      font-size: 1.2em;
+      margin: 2px;
+   }
+
+   .cardText {
+      color: black;
+      margin: 2px;
+   }
+}
