@@ -28,6 +28,7 @@ const Header = () => {
                <Nav className="me-auto">
                   <Nav.Link as={Link} to="/" className="text-white mx-2">Home</Nav.Link>
                   <Nav.Link as={Link} to="/positions" className="text-white mx-2">Positions</Nav.Link>
+                  <Nav.Link as={Link} to="/skills" className="text-white mx-2">Skills</Nav.Link>
                </Nav>
                {!userInfo?.data &&
                   <Nav>

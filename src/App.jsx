@@ -11,6 +11,7 @@ import PositionDetails from './containers/Position/PositionDetails/PositionDetai
 import CreatePosition from './containers/Position/CreatePosition/CreatePosition'
 import RegisterCompany from './containers/Company/RegisterCompany/RegisterCompany'
 import RegisterSkill from './containers/Skill/RegisterSkill/RegisterSkill'
+import Skills from './containers/Skill/Skills/Skills'
 
 import './App.scss'
 
@@ -30,6 +31,7 @@ function App() {
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/company-register' element={<RegisterCompany/>}/>
           <Route path='/skill-register' element={<RegisterSkill/>}/>
+          <Route path='/skills' element={<Skills/>}/>
         </Routes>
         <Footer/>
       </BrowserRouter>
