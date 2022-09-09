@@ -97,6 +97,12 @@ const CreatePosition = () => {
          ['salary', register.salary, 'Invalid salary format'],
       ]
 
+      // build an array with required skills' ids from array of skills (objects with id inside)
+      const makeSkillIdArray = (skillsArray) => {
+         
+         return skillsArray.map(value => {return {"id": value.id}})
+      }
+
       // apply evals and register position if everything is ok
       for (let index in validations) {
          if (!evalField(validations[index][0], validations[index][1])) {
@@ -105,7 +111,8 @@ const CreatePosition = () => {
          } else if (index == validations.length - 1) {
             setRegisterError(false, '')
             const userToken = userInfo?.token
-            dispatch(registerPosition(register.title, register.description, register.companyName, register.location, register.mode, register.salary, userToken))
+            const skillIdsArray = makeSkillIdArray(skillLists.positionSkillList)
+            dispatch(registerPosition(register.title, register.description, register.companyName, register.location, register.mode, register.salary, userToken, skillIdsArray))
             setTimeout(() => navigate("/"), 3000)
          }
       }
@@ -148,7 +155,7 @@ const CreatePosition = () => {
       let positionSkills = skillLists.positionSkillList
       for (const key in positionSkills) {
          if (positionSkills[key].id == skill.id) {
-            positionSkills.splice(key, 1)            
+            positionSkills.splice(key, 1)
          }
       }
 

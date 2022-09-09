@@ -33,7 +33,7 @@ export const positionsSlice = createSlice({
     }
 })
 
-export const registerPosition = (title, description, companyName, location, mode, salary, token) => async (dispatch) => {
+export const registerPosition = (title, description, companyName, location, mode, salary, token, skillsArray) => async (dispatch) => {
     try {
         const body = {
             title: title,
@@ -51,6 +51,11 @@ export const registerPosition = (title, description, companyName, location, mode
         let response = position;
         if (response.status === 201 || response.status === 200) {
             dispatch(register());
+            const body2 = {
+                "position_id": response.data.data.id,
+                "skills": skillsArray
+            }
+            await axios.post('https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/positions/attach-skill-list', body2, config);
         }
     } catch (error) {
         dispatch(logError(error));
