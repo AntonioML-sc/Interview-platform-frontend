@@ -3,7 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Home from "./containers/Home/Home"
 import Login from './containers/User/Login/Login'
 import Register from './containers/User/Register/Register'
-import Profile from './containers/User/Profile/Profile'
+import ApplicantProfile from './containers/User/ApplicantProfile/ApplicantProfile'
+import RecruiterProfile from './containers/User/RecruiterProfile/RecruiterProfile'
 import Header from './components/Header/Header'
 import Footer from './components/Footer/Footer'
 import Positions from './containers/Position/Positions/Positions'
@@ -17,26 +18,27 @@ import './App.scss'
 
 function App() {
 
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Header/>
-        <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/positions' element={<Positions/>}/>
-          <Route path='/position-details' element={<PositionDetails/>}/>
-          <Route path='/position-create' element={<CreatePosition/>}/>
-          <Route path='/login' element={<Login/>}/>
-          <Route path='/register' element={<Register/>}/>
-          <Route path='/profile' element={<Profile/>}/>
-          <Route path='/company-register' element={<RegisterCompany/>}/>
-          <Route path='/skill-register' element={<RegisterSkill/>}/>
-          <Route path='/skills' element={<Skills/>}/>
-        </Routes>
-        <Footer/>
-      </BrowserRouter>
-    </div>
-  )
+   return (
+      <div className="App">
+         <BrowserRouter>
+            <Header />
+            <Routes>
+               <Route path='/' element={<Home />} />
+               <Route path='/positions' element={<Positions />} />
+               <Route path='/position-details' element={<PositionDetails />} />
+               <Route path='/position-create' element={<CreatePosition />} />
+               <Route path='/login' element={<Login />} />
+               <Route path='/register' element={<Register />} />
+               <Route path='/profile-applicant' element={<ApplicantProfile />} />
+               <Route path='/profile-recruiter' element={<RecruiterProfile />} />
+               <Route path='/company-register' element={<RegisterCompany />} />
+               <Route path='/skill-register' element={<RegisterSkill />} />
+               <Route path='/skills' element={<Skills />} />
+            </Routes>
+            <Footer />
+         </BrowserRouter>
+      </div>
+   )
 }
 
 export default App

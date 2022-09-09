@@ -43,9 +43,12 @@ const Header = () => {
                            <Nav.Link as={Link} to="/position-create" className="text-white mx-2" >Create Position</Nav.Link>
                            <Nav.Link as={Link} to="/company-register" className="text-white mx-2" >Register Company</Nav.Link>
                            <Nav.Link as={Link} to="/skill-register" className="text-white mx-2" >Register Skill</Nav.Link>
+                           <Nav.Link as={Link} to="/profile-recruiter" className="text-white mx-2" >My Profile</Nav.Link>
                         </Nav>
                      }
-                     <Nav.Link as={Link} to="/profile" className="text-white mx-2" >My Profile</Nav.Link>
+                     {userInfo?.data.role_id != recruiterRoleId &&
+                        <Nav.Link as={Link} to="/profile-applicant" className="text-white mx-2" >My Profile</Nav.Link>
+                     }
                      <button id="logOutButton" onClick={getOut}>Log out</button>
                   </Nav>
                }
