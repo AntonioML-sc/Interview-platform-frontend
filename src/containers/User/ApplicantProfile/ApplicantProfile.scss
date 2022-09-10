@@ -1,21 +1,79 @@
+#ApplicantProfile {
+   width: 100vw;
+   height: 80vh;
+   background-color: darkgrey;
 
-#ApplicantProfile{
-    width: 100vw;
-    height: 80vh;
-    background-color: darkgrey;
+   .mainBox {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
 
-    .mainBox{
-        height: 100%;
-        background-color: aquamarine;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      .userInfo {
+         background-color: rgb(178, 231, 252);
+         border-radius: 5px;
+         display: flex;
+         flex-direction: column;
+         width: 90vw;
+         height: auto;
+         margin: 1em;
+         padding: 0.5em;
+         align-items: center;
+         justify-content: flex-start;
 
-        p{
-            font-size: 2em;
-            color: white;
-            font-weight: bold;
-            background-color: rgb(1, 82, 82);
-        }
-    }
+         .userInfoItem {
+            padding: 5px;
+            margin: 3px;
+            background-color: white;
+            border-radius: 5px;
+            border: 1px solid grey;
+            height: auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+
+            .userInfoName {
+               color: rgb(75, 75, 233);
+               font-weight: bold;
+               font-size: 1.2em;
+               margin: 2px;
+            }
+
+            .userInfoRole {
+               color: black;
+               margin: 2px;
+               font-weight: bold;
+            }
+
+            .userInfoHeading {
+               color: black;
+               margin: 3px;
+               font-weight: bold;
+            }
+
+            .userInfoText {
+               color: black;
+               margin: 2px;
+            }
+
+            .skillContainer {
+               margin: 2px;
+               display: flex;
+               flex-direction: row;
+               flex-wrap: wrap;
+
+               .skillTag {
+                  background-color: rgb(178, 231, 252);
+                  color: black;
+                  border: 1px solid rgb(75, 75, 233);
+                  border-radius: 1em;
+                  padding: 1px 8px;
+                  margin: 3px 5px 3px 0px;
+                  width: fit-content;
+               }
+            }
+         }
+      }
+   }
 }
