@@ -3,6 +3,7 @@ import React, { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { setPosition } from "../../Position/positionsSlice"
+import { setSkill } from "../../Skill/skillSlice"
 import { userData } from "../userSlice"
 import "./RecruiterProfile.scss"
 
@@ -35,6 +36,14 @@ const RecruiterProfile = () => {
          })
    }
 
+   // save in redux the skill to update or delete and go to update skill page on click
+   const goToUpdateSkill = (skill) => {
+      dispatch(setSkill(skill))
+      setTimeout(() => {
+         navigate('/skill-update')
+      }, 500)
+   }
+
    // ------------ RENDER FUNCTIONS ------------ \\
 
    // render a skill tag for each skill that logged user have
@@ -62,7 +71,7 @@ const RecruiterProfile = () => {
                <div className="userInfoItem" key={index}>
                   <p className="userInfoHeading">Title: {skill.title} </p>
                   <p className="userInfoText"><strong>Description:</strong> {skill.description} </p>
-                  <button id="detailsButton">Edit or delete</button>
+                  <button id="detailsButton" onClick={e => goToUpdateSkill(skill)} >Edit or delete</button>
                </div>
             ))
          )

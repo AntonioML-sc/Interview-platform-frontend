@@ -70,7 +70,7 @@ const UpdateSkill = () => {
                   <button className="registerSubmit" type="submit">Update</button>
                </div>
             </form>
-            <p className="errorMessage">{register.isError ? register.message : ''}</p>
+            <p className="errorMessage">{skillData.isError ? skillData.message : ''}</p>
             <p className="errorMessage">{skillInfo.isError ? skillInfo.errorMessage : skillInfo.successMessage}</p>
          </div>
       </div>
