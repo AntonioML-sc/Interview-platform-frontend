@@ -20,7 +20,7 @@ const RecruiterProfile = () => {
 
    // ------------ RENDER FUNCTIONS ------------ \\
 
-   // render a position card for each position stored in positionsList in redux slice
+   // render a skill tag for each skill that logged user have
    const SkillList = () => {
       if (userInfo?.data.skills.length > 0) {
          return (
@@ -36,7 +36,7 @@ const RecruiterProfile = () => {
       }
    }
 
-   // render a skill card for each position stored in positionsList in redux slice
+   // render a skill card for each logged user created skill
    const SkillAdminList = () => {
       if (userInfo?.data.skills.length > 0) {
          const adminSkillList = userInfo.data.skills.filter(value => { return value.pivot.creator })
@@ -45,6 +45,28 @@ const RecruiterProfile = () => {
                <div className="userInfoItem" key={index}>
                   <p className="userInfoHeading">Title: {skill.title} </p>
                   <p className="userInfoText"><strong>Description:</strong> {skill.description} </p>
+                  <button id="detailsButton">Edit or delete</button>
+               </div>
+            ))
+         )
+      } else {
+
+         return (
+            <div></div>
+         )
+      }
+   }
+
+   // render a company card for each company registered by logged user
+   const CompanyAdminList = () => {
+      if (userInfo?.data.companies.length > 0) {
+         return (
+            userInfo.data.companies.map((company, index) => (
+               <div className="userInfoItem" key={index}>
+                  <p className="userInfoHeading">Name: {company.name} </p>
+                  <p className="userInfoText">Email: {company.email} </p>
+                  <p className="userInfoText">Address: {company.address} </p>
+                  <p className="userInfoText">Description: {company.description} </p>
                   <button id="detailsButton">Edit or delete</button>
                </div>
             ))
@@ -102,10 +124,23 @@ const RecruiterProfile = () => {
       )
    }
 
+   // render companies that logged user is the creator
+   const UserAdminCompanies = () => {
+      return (
+         <div className="userInfo">
+            <div className="userInfoItem">
+               <p className="userInfoSection">MY COMPANIES</p>
+            </div>
+            <CompanyAdminList />
+         </div>
+      )
+   }
+
    return (
       <div id="RecruiterProfile">
          <div className="mainBox">
             <UserInfo />
+            <UserAdminCompanies />
             <UserAdminSkills />
          </div>
       </div>
