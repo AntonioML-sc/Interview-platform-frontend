@@ -1,7 +1,8 @@
 
 import React, { useEffect } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import { setPosition } from "../../Position/positionsSlice"
 import { userData } from "../userSlice"
 import "./RecruiterProfile.scss"
 
@@ -9,6 +10,7 @@ const RecruiterProfile = () => {
    const recruiterRoleId = "5695fbbd-4675-4b2a-b31d-603252c21c94"
    const userInfo = useSelector(userData)
    const navigate = useNavigate()
+   const dispatch = useDispatch()
 
    useEffect(() => {
       if (!userInfo?.data) {
@@ -17,6 +19,20 @@ const RecruiterProfile = () => {
          navigate('/profile-applicant')
       }
    }, [])
+
+   // ------------ HANDLERS ------------ \\
+
+   // go to position details on click
+   const goToPosition = async (positionId) => {
+      await axios.get(`https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/positions/get-by-id/${positionId}`)
+         .then(resp => {
+            dispatch(setPosition(resp.data.data))
+         }).then(resp => {
+            navigate('/position-details')
+         }).catch(error => {
+            console.log(error)
+         })
+   }
 
    // ------------ RENDER FUNCTIONS ------------ \\
 
@@ -68,6 +84,30 @@ const RecruiterProfile = () => {
                   <p className="userInfoText">Address: {company.address} </p>
                   <p className="userInfoText">Description: {company.description} </p>
                   <button id="detailsButton">Edit or delete</button>
+               </div>
+            ))
+         )
+      } else {
+
+         return (
+            <div></div>
+         )
+      }
+   }
+
+   // render a position card for each position
+   const PositionList = () => {
+      if (userInfo?.data.positions.length > 0) {
+         return (
+            userInfo.data.positions.map((position, index) => (
+               <div className="userInfoItem" key={index}>
+                  <p className="userInfoHeading"> {position.title} </p>
+                  <p className="userInfoText"> Company: {position.company.name} </p>
+                  <p className="userInfoText"> Status: {position.application.status} </p>
+                  <div className="skillContainer">
+                     <button id="detailsButton" onClick={e => goToPosition(position.id)}>See details</button>
+                     <button id="detailsButton">Edit or close</button>
+                  </div>
                </div>
             ))
          )
@@ -136,12 +176,25 @@ const RecruiterProfile = () => {
       )
    }
 
+   // render positions that user is applying for
+   const UserPositions = () => {
+      return (
+         <div className="userInfo">
+            <div className="userInfoItem">
+               <p className="userInfoSection">MY POSITIONS</p>
+            </div>
+            <PositionList />
+         </div>
+      )
+   }
+
    return (
       <div id="RecruiterProfile">
          <div className="mainBox">
             <UserInfo />
             <UserAdminCompanies />
             <UserAdminSkills />
+            <UserPositions />
          </div>
       </div>
    )
