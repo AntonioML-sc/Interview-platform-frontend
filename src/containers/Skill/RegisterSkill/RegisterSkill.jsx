@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { evalField } from "../../../utils";
-import { userData } from "../../User/userSlice";
+import { refreshUserData, userData } from "../../User/userSlice";
 import { registerSkill, selectSkill } from "../skillSlice";
 import './RegisterSkill.scss'
 
@@ -32,7 +32,8 @@ const RegisterSkill = () => {
       })
    }
 
-   // test if the info stored is correct and register skill in that case
+   // test if the info stored is correct and register skill in that case. Then, reset skills in redux and refresh
+   // user data from db (because user skills will have changed)
    const skillRegister = async (event) => {
       event.preventDefault()
 
@@ -60,7 +61,10 @@ const RegisterSkill = () => {
                 setRegisterError(false, '')
                 const userToken = userInfo?.token
                 dispatch(registerSkill(register.title, register.description, userToken))
-                setTimeout(() => navigate("/"), 1000)
+                dispatch(setSkill(""))
+                dispatch(setSkillList([]))
+                dispatch(refreshUserData())
+                setTimeout(() => navigate("/skills"), 1000)
             }
         }
    }

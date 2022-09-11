@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { evalField } from "../../../utils";
-import { userData } from "../../User/userSlice";
+import { refreshUserData, userData } from "../../User/userSlice";
 import { deleteSkill, selectSkill, setSkill, setSkillList, updateSkill } from "../skillSlice";
 import './UpdateSkill.scss'
 
@@ -67,7 +67,8 @@ const UpdateSkill = () => {
          ['description', skillData.description, 'Invalid description format']
       ]
 
-      // apply evals and update position if everything is ok. Then, reset skills in redux
+      // apply evals and update position if everything is ok. Then, reset skills in redux and refresh
+      // user data from db (because user skills will have changed)
       for (let index in validations) {
          if (!evalField(validations[index][0], validations[index][1])) {
             setError(true, validations[index][2])
@@ -78,18 +79,21 @@ const UpdateSkill = () => {
             dispatch(updateSkill(skillData.id, skillData.title, skillData.description, userToken))
             dispatch(setSkill(""))
             dispatch(setSkillList([]))
+            dispatch(refreshUserData())
             setTimeout(() => navigate("/skills"), 1000)
          }
       }
    }
 
-   // test if the info stored is correct and update skill in that case
+   // test if the info stored is correct and delete skill in that case. Then, reset skills in redux and refresh
+   // user data from db (because user skills will have changed)
    const skillDelete = (event) => {
       const userToken = userInfo?.token
       setError(false, '')
       dispatch(deleteSkill(skillData.id, userToken))
       dispatch(setSkill(""))
       dispatch(setSkillList([]))
+      dispatch(refreshUserData())
       setTimeout(() => navigate("/skills"), 1000)
    }
 
