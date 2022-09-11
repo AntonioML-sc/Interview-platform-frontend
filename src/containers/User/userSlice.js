@@ -23,6 +23,12 @@ export const userSlice = createSlice({
                 ...action.payload
             }
         },
+        refresh: (state, action) => {
+            return {
+                ...state,
+                ...action.payload
+            }
+        },
         logout: (state, action) => {
             return {
                 ...state.initialState
@@ -83,7 +89,24 @@ export const loginUser = (body) => async (dispatch) => {
     }
 };
 
-export const { register, login, logout, logError } = userSlice.actions;
+export const refreshUserData = () => async (dispatch, getState) => {
+    const userInfo = getState().user
+    
+    try {
+        const config = {
+            headers: { "Authorization": `Bearer ${userInfo.token}` }
+        }
+        const userProfile = await axios.get('https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/my-profile', config);
+        const profileData = {
+            "data": userProfile.data.data
+        }
+        dispatch(refresh({ ...profileData, token: userInfo.token }));
+    } catch (error) {
+        dispatch(logError(error));
+    }
+};
+
+export const { register, login, logout, logError, refresh } = userSlice.actions;
 
 export const userData = (state) => state.user;
 
