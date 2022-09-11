@@ -109,7 +109,7 @@ const PositionDetails = () => {
 		if (positionInfo.skills.length > 0) {
 			return (
 				positionInfo.skills.map((skill, index) => (
-					<p className="skillTag">{skill.title}</p>
+					<p key={index} className="skillTag">{skill.title}</p>
 				))
 			)
 		}
