@@ -1,16 +1,18 @@
 
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { evalField } from "../../../utils";
 import { userData } from "../../User/userSlice";
-import { selectSkill } from "../skillSlice";
+import { selectSkill, setSkill, setSkillList, updateSkill } from "../skillSlice";
 import './UpdateSkill.scss'
 
 const UpdateSkill = () => {
    const userInfo = useSelector(userData)
    const skillInfo = useSelector(selectSkill)
    const navigate = useNavigate()
+   const dispatch = useDispatch()
 
    let [skillData, setSkillData] = useState({
       id: "",
@@ -48,7 +50,37 @@ const UpdateSkill = () => {
 
    // test if the info stored is correct and update skill in that case
    const skillUpdate = (event) => {
-      return
+      event.preventDefault()
+
+      // function to set an error with custon message in register hook
+      const setUpdateError = (value, message) => {
+         setSkillData({
+            ...skillData,
+            isError: value,
+            message: message
+         });
+      }
+
+      // form inputs to validate
+      const validations = [
+         ['title', skillData.title, 'Invalid title format'],
+         ['description', skillData.description, 'Invalid description format']
+      ]
+
+      // apply evals and update position if everything is ok. Then, reset skills in redux
+      for (let index in validations) {
+         if (!evalField(validations[index][0], validations[index][1])) {
+            setUpdateError(true, validations[index][2])
+            return
+         } else if (index == validations.length - 1) {
+            setUpdateError(false, '')
+            const userToken = userInfo?.token
+            dispatch(updateSkill(skillData.id, skillData.title, skillData.description, userToken))
+            dispatch(setSkill(""))
+            dispatch(setSkillList([]))
+            setTimeout(() => navigate("/skills"), 1000)
+         }
+      }
    }
 
    return (
