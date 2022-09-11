@@ -11,6 +11,7 @@ const RecruiterProfile = () => {
    const userInfo = useSelector(userData)
    const navigate = useNavigate()
    const dispatch = useDispatch()
+   let test
 
    useEffect(() => {
       if (!userInfo?.data) {
@@ -118,6 +119,47 @@ const RecruiterProfile = () => {
          )
       }
    }
+   
+   // render a test card for each test
+   const TestList = () => {
+      if (userInfo?.data.tests.length > 0) {         
+         for (const index in userInfo.data.tests) {
+            test = (userInfo.data.tests[index])
+            return (
+               <div className="userInfoItem" key={index}>
+                  <p className="userInfoHeading"> Test {index * 1 + 1} </p>
+                  <p className="userInfoText">Date: {new Date(test.date).toLocaleDateString()}</p>
+                  <p className="userInfoText">Skills:</p>
+                  <div className="skillContainer">
+                     <SkillTestList />
+                  </div>                  
+                  <button id="detailsButton">See details</button>
+               </div>
+            )
+         }
+      } else {
+
+         return (
+            <div></div>
+         )
+      }
+   }
+
+   // render a skill tag for each test skill
+   const SkillTestList = () => {
+      if (test.skills.length > 0) {
+         return (
+            test.skills.map((skill, index) => (
+               <p key={index} className="skillTag">{skill.title}</p>
+            ))
+         )
+      } else {
+
+         return (
+            <div></div>
+         )
+      }
+   }
 
    // render personal info
    const UserInfo = () => {
@@ -187,17 +229,32 @@ const RecruiterProfile = () => {
          </div>
       )
    }
-
-   return (
-      <div id="RecruiterProfile">
-         <div className="mainBox">
-            <UserInfo />
-            <UserAdminCompanies />
-            <UserAdminSkills />
-            <UserPositions />
+   
+   // render tests that user is implied in
+   const UserTests = () => {
+      return (
+         <div className="userInfo">
+            <div className="userInfoItem">
+               <p className="userInfoSection">MY TESTS</p>
+            </div>
+            <TestList />
          </div>
-      </div>
-   )
+      )
+   }
+
+   if (userInfo?.data) {
+      return (
+         <div id="RecruiterProfile">
+            <div className="mainBox">
+               <UserInfo />
+               <UserAdminCompanies />
+               <UserAdminSkills />
+               <UserPositions />
+               <UserTests />
+            </div>
+         </div>
+      )
+   }   
 }
 
 export default RecruiterProfile
