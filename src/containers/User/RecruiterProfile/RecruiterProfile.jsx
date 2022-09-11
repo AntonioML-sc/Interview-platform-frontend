@@ -36,10 +36,34 @@ const RecruiterProfile = () => {
       }
    }
 
+   // render a skill card for each position stored in positionsList in redux slice
+   const SkillAdminList = () => {
+      if (userInfo?.data.skills.length > 0) {
+         const adminSkillList = userInfo.data.skills.filter(value => { return value.pivot.creator })
+         return (
+            adminSkillList.map((skill, index) => (
+               <div className="userInfoItem" key={index}>
+                  <p className="userInfoHeading">Title: {skill.title} </p>
+                  <p className="userInfoText"><strong>Description:</strong> {skill.description} </p>
+                  <button id="detailsButton">Edit or delete</button>
+               </div>
+            ))
+         )
+      } else {
+
+         return (
+            <div></div>
+         )
+      }
+   }
+
    // render personal info
    const UserInfo = () => {
       return (
          <div className="userInfo">
+            <div className="userInfoItem">
+               <p className="userInfoSection">MY PROFILE</p>
+            </div>
             <div className="userInfoItem">
                <p className="userInfoName">{userInfo.data.first_name} {userInfo.data.last_name}</p>
             </div>
@@ -66,10 +90,23 @@ const RecruiterProfile = () => {
       )
    }
 
+   // render skills that logged user is the creator
+   const UserAdminSkills = () => {
+      return (
+         <div className="userInfo">
+            <div className="userInfoItem">
+               <p className="userInfoSection">CREATED SKILLS</p>
+            </div>
+            <SkillAdminList />
+         </div>
+      )
+   }
+
    return (
       <div id="RecruiterProfile">
          <div className="mainBox">
             <UserInfo />
+            <UserAdminSkills />
          </div>
       </div>
    )
