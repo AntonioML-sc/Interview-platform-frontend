@@ -1,6 +1,6 @@
 
 import axios from "axios"
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { setPosition } from "../../Position/positionsSlice"
@@ -12,6 +12,8 @@ const ApplicantProfile = () => {
    const userInfo = useSelector(userData)
    const navigate = useNavigate()
    const dispatch = useDispatch()
+
+   let test
 
    useEffect(() => {
       if (!userInfo?.data) {
@@ -37,7 +39,7 @@ const ApplicantProfile = () => {
 
    // ------------ RENDER FUNCTIONS ------------ \\
 
-   // render a position card for each position stored in positionsList in redux slice
+   // render a skill tag for each user skill
    const SkillList = () => {
       if (userInfo?.data.skills.length > 0) {
          return (
@@ -53,7 +55,7 @@ const ApplicantProfile = () => {
       }
    }
 
-   // render a position card for each position stored in positionsList in redux slice
+   // render a position card for each position
    const PositionList = () => {
       if (userInfo?.data.positions.length > 0) {
          return (
@@ -64,6 +66,47 @@ const ApplicantProfile = () => {
                   <p className="userInfoText"> Status: {position.application.status} </p>
                   <button id="detailsButton" onClick={e => goToPosition(position.id)}>See details</button>
                </div>
+            ))
+         )
+      } else {
+
+         return (
+            <div></div>
+         )
+      }
+   }
+
+   // render a test card for each test
+   const TestList = () => {
+      if (userInfo?.data.tests.length > 0) {         
+         for (const index in userInfo.data.tests) {
+            test = (userInfo.data.tests[index])
+            return (
+               <div className="userInfoItem" key={index}>
+                  <p className="userInfoHeading"> Test {index * 1 + 1} </p>
+                  <p className="userInfoText">Date: {new Date(test.date).toLocaleDateString()}</p>
+                  <p className="userInfoText">Skills:</p>
+                  <div className="skillContainer">
+                     <SkillTestList />
+                  </div>                  
+                  <button id="detailsButton">See details</button>
+               </div>
+            )
+         }
+      } else {
+
+         return (
+            <div></div>
+         )
+      }
+   }
+
+   // render a skill tag for each test skill
+   const SkillTestList = () => {
+      if (test.skills.length > 0) {
+         return (
+            test.skills.map((skill, index) => (
+               <p key={index} className="skillTag">{skill.title}</p>
             ))
          )
       } else {
@@ -119,14 +162,30 @@ const ApplicantProfile = () => {
       )
    }
 
-   return (
-      <div id="ApplicantProfile">
-         <div className="mainBox">
-            <UserInfo />
-            <UserPositions />
+   // render tests that user is implied in
+   const UserTests = () => {
+      return (
+         <div className="userInfo">
+            <div className="userInfoItem">
+               <p className="userInfoSection">MY TESTS</p>
+            </div>
+            <TestList />
          </div>
-      </div>
-   )
+      )
+   }
+
+   if (userInfo?.data) {
+      return (
+         <div id="ApplicantProfile">
+            <div className="mainBox">
+               <UserInfo />
+               <UserPositions />
+               <UserTests />
+            </div>
+         </div>
+      )
+   }
+   
 }
 
 export default ApplicantProfile
