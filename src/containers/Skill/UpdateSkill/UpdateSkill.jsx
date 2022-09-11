@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { evalField } from "../../../utils";
 import { userData } from "../../User/userSlice";
-import { selectSkill, setSkill, setSkillList, updateSkill } from "../skillSlice";
+import { deleteSkill, selectSkill, setSkill, setSkillList, updateSkill } from "../skillSlice";
 import './UpdateSkill.scss'
 
 const UpdateSkill = () => {
@@ -38,6 +38,15 @@ const UpdateSkill = () => {
       }
    }, [])
 
+   // function to set an error with custon message in register hook
+   const setError = (value, message) => {
+      setSkillData({
+         ...skillData,
+         isError: value,
+         message: message
+      });
+   }
+
    // ------------ HANDLERS ------------ \\
 
    // handler to update hook with info from form fields
@@ -52,15 +61,6 @@ const UpdateSkill = () => {
    const skillUpdate = (event) => {
       event.preventDefault()
 
-      // function to set an error with custon message in register hook
-      const setUpdateError = (value, message) => {
-         setSkillData({
-            ...skillData,
-            isError: value,
-            message: message
-         });
-      }
-
       // form inputs to validate
       const validations = [
          ['title', skillData.title, 'Invalid title format'],
@@ -70,10 +70,10 @@ const UpdateSkill = () => {
       // apply evals and update position if everything is ok. Then, reset skills in redux
       for (let index in validations) {
          if (!evalField(validations[index][0], validations[index][1])) {
-            setUpdateError(true, validations[index][2])
+            setError(true, validations[index][2])
             return
          } else if (index == validations.length - 1) {
-            setUpdateError(false, '')
+            setError(false, '')
             const userToken = userInfo?.token
             dispatch(updateSkill(skillData.id, skillData.title, skillData.description, userToken))
             dispatch(setSkill(""))
@@ -81,6 +81,16 @@ const UpdateSkill = () => {
             setTimeout(() => navigate("/skills"), 1000)
          }
       }
+   }
+
+   // test if the info stored is correct and update skill in that case
+   const skillDelete = (event) => {
+      const userToken = userInfo?.token
+      setError(false, '')
+      dispatch(deleteSkill(skillData.id, userToken))
+      dispatch(setSkill(""))
+      dispatch(setSkillList([]))
+      setTimeout(() => navigate("/skills"), 1000)
    }
 
    return (
@@ -100,6 +110,10 @@ const UpdateSkill = () => {
 
                <div className="registerItem">
                   <button className="registerSubmit" type="submit">Update</button>
+               </div>
+
+               <div className="registerItem">
+                  <button className="registerSubmit" type="button" onClick={skillDelete} >Delete</button>
                </div>
             </form>
             <p className="errorMessage">{skillData.isError ? skillData.message : ''}</p>

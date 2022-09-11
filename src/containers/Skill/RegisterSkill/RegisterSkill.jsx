@@ -60,7 +60,7 @@ const RegisterSkill = () => {
                 setRegisterError(false, '')
                 const userToken = userInfo?.token
                 dispatch(registerSkill(register.title, register.description, userToken))
-                setTimeout(() => navigate("/"), 3000)
+                setTimeout(() => navigate("/"), 1000)
             }
         }
    }
