@@ -14,6 +14,7 @@ import RegisterCompany from './containers/Company/RegisterCompany/RegisterCompan
 import RegisterSkill from './containers/Skill/RegisterSkill/RegisterSkill'
 import Skills from './containers/Skill/Skills/Skills'
 import UpdateSkill from './containers/Skill/UpdateSkill/UpdateSkill'
+import CreateTest from './containers/SkillTest/CreateTest/CreateTest'
 
 import './App.scss'
 
@@ -36,6 +37,7 @@ function App() {
                <Route path='/skill-register' element={<RegisterSkill />} />
                <Route path='/skills' element={<Skills />} />
                <Route path='/skill-update' element={<UpdateSkill />} />
+               <Route path='/test-create' element={<CreateTest />} />
             </Routes>
             <Footer />
          </BrowserRouter>
