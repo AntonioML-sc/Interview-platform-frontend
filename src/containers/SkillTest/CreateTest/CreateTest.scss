@@ -1,21 +1,98 @@
-
 #CreateTest {
    width: 100vw;
-   height: 80vh;
+   min-height: 80vh;
    background-color: darkgrey;
 
-   .wellcomeMessageBox {
+   .mainBox {
+      min-height: 80vh;
       height: 100%;
       background-color: aquamarine;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
 
-      p {
-         font-size: 2em;
-         color: white;
-         font-weight: bold;
-         background-color: rgb(1, 82, 82);
+      .positionSkillList {
+         background-color: grey;
+         display: flex;
+         flex-direction: row;
+         flex-wrap: wrap;
+         overflow: hidden;
+         max-width: 90vw;
+         max-height: 15vh;
+         height: auto;
+         margin: 1em;
+         padding: 0.5em;
+         align-items: center;
+         justify-content: flex-start;
+
+         .skillTag {
+            background-color: rgb(178, 231, 252);
+            color: black;
+            border: 1px solid rgb(75, 75, 233);
+            border-radius: 1em;
+            padding: 1px 8px;
+            margin: 3px 5px;
+            width: fit-content;
+            cursor: pointer;
+         }
+      }
+
+      .otherSkillContainer {
+         background-color: lightgrey;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+
+         .searchBar {
+            text-align: center;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: fit-content;
+
+            .searchBarForm {
+               display: flex;
+               flex-direction: row;
+               align-items: center;
+               justify-content: center;
+
+               .inputBox {
+                  border-color: grey;
+                  color: black;
+                  background-color: white;
+                  width: 15em;
+                  height: 1.5em;
+               }
+            }
+         }
+
+         .otherSkillList {
+            background-color: grey;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            overflow: hidden;
+            max-width: 90vw;
+            max-height: 15vh;
+            height: auto;
+            margin: 1em;
+            padding: 0.5em;
+            align-items: center;
+            justify-content: flex-start;
+
+            .skillTag {
+               background-color: rgb(178, 231, 252);
+               color: black;
+               border: 1px solid rgb(75, 75, 233);
+               border-radius: 1em;
+               padding: 1px 8px;
+               margin: 3px 5px;
+               width: fit-content;
+               cursor: pointer;
+            }
+         }
       }
    }
 }
