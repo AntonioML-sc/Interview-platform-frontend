@@ -18,7 +18,8 @@ const CreateTest = () => {
       positionSkillList: [],
       otherSkillList: [],
       searchWord: "",
-      myTimeOut: 0
+      myTimeOut: 0,
+      lastChange: ""
    })
 
    // data to register test
@@ -40,8 +41,7 @@ const CreateTest = () => {
             if (skillLists.searchWord == "") {
                await axios.get('https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/skills/get-all')
                   .then(resp => {
-                     console.log(resp.data.data)
-                     const showList = resp.data.data.filter(skill => { return !skillLists.positionSkillList.includes(skill) })
+                     const showList = resp.data.data.filter(skill => { return skillLists.positionSkillList.every(sk => {return sk.id != skill.id}) })
                      setSkillLists({
                         ...skillLists,
                         otherSkillList: showList
@@ -50,7 +50,7 @@ const CreateTest = () => {
             } else {
                await axios.get(`https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/skills/get-by-title/${skillLists.searchWord}`)
                   .then(resp => {
-                     const showList = resp.data.data.filter(skill => { return !skillLists.positionSkillList.includes(skill) })
+                     const showList = resp.data.data.filter(skill => { return skillLists.positionSkillList.every(sk => {return sk.id != skill.id}) })
                      setSkillLists({
                         ...skillLists,
                         otherSkillList: showList
@@ -62,7 +62,7 @@ const CreateTest = () => {
          }
       }
       fetchSkills()
-   }, [skillLists.searchWord])
+   }, [skillLists.searchWord, skillLists.lastChange])
 
    // ------------ EVENT HANDLERS ------------ \\
 
@@ -98,12 +98,33 @@ const CreateTest = () => {
 
    // add the clicked skill tag from general skill list to position required skill list
    const addToPositionSkillList = (event, skill) => {
-      return
+      const check = () => {
+
+         return (skillLists.positionSkillList.every(value => { return value.id != skill.id }))
+      }
+      if (check()) {
+         setSkillLists({
+            ...skillLists,
+            positionSkillList: [...skillLists.positionSkillList, skill],
+            lastChange: "in:" + skill.id
+         })
+      }
    }
 
    // remove the clicked skill tag from position required skill list
    const removeFromPositionSkillList = (event, skill) => {
-      return
+      let positionSkills = skillLists.positionSkillList
+      for (const key in positionSkills) {
+         if (positionSkills[key].id == skill.id) {
+            positionSkills.splice(key, 1)
+         }
+      }
+
+      setSkillLists({
+         ...skillLists,
+         positionSkillList: positionSkills,
+         lastChange: "out:" + skill.id
+      })
    }
 
    // ------------ RENDER FUNCTIONS ------------ \\
