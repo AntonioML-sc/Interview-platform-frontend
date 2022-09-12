@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom"
 import { selectPosition, setPosition } from "../positionsSlice"
 import { userData } from "../../User/userSlice"
 import "./PositionDetails.scss"
+import { setUserId } from "../../SkillTest/skillTestSlice"
 
 const PositionDetails = () => {
    const userInfo = useSelector(userData)
@@ -83,6 +84,15 @@ const PositionDetails = () => {
          })
    }
 
+   // handler to go to create test
+   const goToCreateTest = (userId) => {
+      console.log(userId)
+      dispatch(setUserId(userId))
+      setTimeout(() => {
+         navigate('/test-create')
+      }, 500)
+   }
+
    // ------------ RENDER FUNCTIONS ------------ \\
 
    // renders a button to apply for the position or a message if logged user is the admin or already applied
@@ -127,7 +137,7 @@ const PositionDetails = () => {
                <p className="cardText"><strong>{user.title.toUpperCase()}</strong></p>
                <p className="cardText"><strong>Contact: </strong>{user.email} | {user.phone}</p>
                <div className="skillContainer">
-                  <button id="detailsButton">Schedule test</button>
+                  <button id="detailsButton" onClick={e => goToCreateTest(user.id)}>Schedule test</button>
                </div>
             </div>
          ))
