@@ -1,4 +1,5 @@
 
+import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
@@ -34,7 +35,34 @@ const CreateTest = () => {
       if (!userInfo?.data || !userIdInfo || userIdInfo == "") {
          navigate('/')
       }
-   }, [])
+      const fetchSkills = async () => {
+         try {
+            if (skillLists.searchWord == "") {
+               await axios.get('https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/skills/get-all')
+                  .then(resp => {
+                     console.log(resp.data.data)
+                     const showList = resp.data.data.filter(skill => { return !skillLists.positionSkillList.includes(skill) })
+                     setSkillLists({
+                        ...skillLists,
+                        otherSkillList: showList
+                     })
+                  })
+            } else {
+               await axios.get(`https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/skills/get-by-title/${skillLists.searchWord}`)
+                  .then(resp => {
+                     const showList = resp.data.data.filter(skill => { return !skillLists.positionSkillList.includes(skill) })
+                     setSkillLists({
+                        ...skillLists,
+                        otherSkillList: showList
+                     })
+                  })
+            }
+         } catch (error) {
+            console.log(error)
+         }
+      }
+      fetchSkills()
+   }, [skillLists.searchWord])
 
    // ------------ EVENT HANDLERS ------------ \\
 
@@ -50,10 +78,68 @@ const CreateTest = () => {
    const testRegister = async (event) => {
       return
    }
-   
+
    // handler for skill search
    const handleChange = (event) => {
+      if (skillLists.myTimeOut != 0) {
+         clearInterval(skillLists.myTimeOut)
+      }
+      setSkillLists({
+         ...skillLists,
+         myTimeOut: setTimeout(() => {
+            setSkillLists({
+               ...skillLists,
+               searchWord: event.target.value,
+               myTimeOut: 0
+            })
+         }, 400)
+      })
+   }
+
+   // add the clicked skill tag from general skill list to position required skill list
+   const addToPositionSkillList = (event, skill) => {
       return
+   }
+
+   // remove the clicked skill tag from position required skill list
+   const removeFromPositionSkillList = (event, skill) => {
+      return
+   }
+
+   // ------------ RENDER FUNCTIONS ------------ \\
+
+   // renders otherSkillList
+   const OtherSkillList = () => {
+      if (skillLists.otherSkillList?.length > 0) {
+
+         return (
+            skillLists.otherSkillList.map((skill, index) => (
+               <p key={index} className="skillTag" onClick={event => addToPositionSkillList(event, skill)} >{skill.title}</p>
+            ))
+         )
+      } else {
+
+         return (
+            <div></div>
+         )
+      }
+   }
+
+   // renders positionSkillList
+   const PositionSkillList = () => {
+      if (skillLists.positionSkillList?.length > 0) {
+
+         return (
+            skillLists.positionSkillList.map((skill, index) => (
+               <p key={index} className="skillTag" onClick={event => removeFromPositionSkillList(event, skill)} >{skill.title}</p>
+            ))
+         )
+      } else {
+
+         return (
+            <div></div>
+         )
+      }
    }
 
    return (
@@ -74,7 +160,7 @@ const CreateTest = () => {
                   <p className="registerLabel">Skills required</p>
                </div>
                <div className="positionSkillList">
-                  {/* <PositionSkillList /> */}
+                  <PositionSkillList />
                </div>
 
                <div className="registerItem">
@@ -93,7 +179,7 @@ const CreateTest = () => {
                   </form>
                </div>
                <div className="otherSkillList">
-                  {/* <OtherSkillList /> */}
+                  <OtherSkillList />
                </div>
             </div>
 
