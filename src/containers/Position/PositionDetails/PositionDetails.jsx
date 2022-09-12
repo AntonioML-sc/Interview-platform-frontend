@@ -86,7 +86,6 @@ const PositionDetails = () => {
 
    // handler to go to create test
    const goToCreateTest = (userId) => {
-      console.log(userId)
       dispatch(setUserId(userId))
       setTimeout(() => {
          navigate('/test-create')

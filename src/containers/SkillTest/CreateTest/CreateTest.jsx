@@ -3,8 +3,9 @@ import axios from "axios"
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { userData } from "../../User/userSlice"
-import { selectUserId } from "../skillTestSlice"
+import { evalField } from "../../../utils"
+import { refreshUserData, userData } from "../../User/userSlice"
+import { createTest, selectUserId } from "../skillTestSlice"
 import "./CreateTest.scss"
 
 const CreateTest = () => {
@@ -76,8 +77,50 @@ const CreateTest = () => {
 
    // handler to test if the info stored in hook is correct and register position in that case
    const testRegister = async (event) => {
-      return
+      event.preventDefault()
+
+      // function to set an error with custon message in register hook
+      const setRegisterError = (value, message) => {
+         setRegister({
+            ...register,
+            isError: value,
+            message: message
+         });
+      }
+
+      // form inputs to validate
+      const validations = [
+         ['date', register.date, 'Invalid date format'],
+         ['time', register.time, 'Invalid time format']
+      ]
+
+      // build an array with required skills' ids from array of skills (objects with id inside)
+      const makeSkillIdArray = (skillsArray) => {
+         
+         return skillsArray.map(value => {return {"id": value.id}})
+      }
+
+      // apply evals and register position if everything is ok
+      for (let index in validations) {
+         if (!evalField(validations[index][0], validations[index][1])) {
+            setRegisterError(true, validations[index][2])
+            return
+         } else if (index == validations.length - 1) {
+            setRegisterError(false, '')
+            const userToken = userInfo?.token
+            const skillIdsArray = makeSkillIdArray(skillLists.positionSkillList)
+            const body = {
+               date: register.date + " " + register.time,
+               examinee_id: userIdInfo,
+               skills: skillIdsArray
+            }
+            dispatch(createTest(body, userToken))            
+            dispatch(refreshUserData())
+            setTimeout(() => navigate("/"), 1000)
+         }
+      }
    }
+
 
    // handler for skill search
    const handleChange = (event) => {
@@ -170,11 +213,11 @@ const CreateTest = () => {
             <form onSubmit={testRegister}>
                <div className="registerItem">
                   <label className="registerLabel">Date</label>
-                  <input className="registerInput" onChange={handleInput} type="text" name="date" />
+                  <input className="registerInput" onChange={handleInput} type="text" placeholder="2022-09-30" name="date" />
                </div>
                <div className="registerItem">
                   <label className="registerLabel">Time</label>
-                  <input className="registerInput" onChange={handleInput} type="text" name="time" />
+                  <input className="registerInput" onChange={handleInput} type="text" placeholder="17:30:00" name="time" />
                </div>
 
                <div className="registerItem">

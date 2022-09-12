@@ -33,6 +33,10 @@ const evalDate = (st) => {
     return /^[\d]{4}[-]{1}[\d]{2}[-]{1}[\d]{2}$/.test(st);
 }
 
+const evalTime = (st) => {
+    return /^[\d]{2}[:]{1}[\d]{2}[:]{1}[\d]{2}$/.test(st);
+}
+
 const evalPassword = (st) => {
     // It must have at least 8 characters, 1 lower case letter, 1 upper case letter, 1 number and 1 special character
     return /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\+\-_=\?/])(?=.{8,})/.test(st);
@@ -55,6 +59,7 @@ const evalField = (key, value) => {
         case 'description': return true;
         case 'mark': return evalMark(value);
         case 'date': return evalDate(value);
+        case 'time': return evalTime(value);
         case 'salary': return evalTitle(value);
         case 'company_name': return evalName(value);
         case 'location': return evalTitle(value);
