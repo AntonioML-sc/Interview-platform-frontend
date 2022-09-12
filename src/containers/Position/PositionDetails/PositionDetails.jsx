@@ -117,22 +117,32 @@ const PositionDetails = () => {
 
 	return (
 		<div id="PositionDetails">
-			<div className="positionTextBox">
-				<p className="cardTitle">{positionInfo.title}</p>
-				<p className="cardCompany">{positionInfo.company.name.toUpperCase()}</p>
-				<p className="cardText"><strong>Publication date: </strong>{new Date(positionInfo.created_at).toLocaleDateString()}</p>
-				<ActionsLine />
-				<p className="cardText"><strong>Number of applicants: </strong>{applicants}</p>
-				<p className="cardText"><strong>Location: </strong>{positionInfo.location}</p>
-				<p className="cardText"><strong>Mode: </strong>{positionInfo.mode}</p>
-				<p className="cardText"><strong>Salary: </strong>{positionInfo.salary}</p>
-				<p className="cardText"><strong>REQUIRED SKILLS:</strong></p>
-				<div className="skillContainer">
-					<SkillList />
+			<div className="detailsBox positionDetailsBoxColor">
+				<div className="cardBox">
+					<p className="cardHeading">POSITION DETAILS</p>
 				</div>
-				<p className="cardText"><strong>DESCRIPTION:</strong></p>
-				<p className="cardText">{positionInfo.description}</p>
-				<p className="cardText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, ipsum consectetur distinctio ullam harum nostrum ducimus quod quo omnis incidunt quas ut, sint, error quia maiores magni. Consequuntur eum assumenda molestiae nobis excepturi fugit, saepe aperiam dicta inventore doloremque facere accusantium, laudantium ipsam et autem dignissimos, velit odit? Asperiores, veniam? Provident nostrum sunt suscipit blanditiis, voluptas in ipsam adipisci laboriosam consequuntur, eum fugiat, dolores rem optio aperiam doloremque aliquam natus labore maxime perspiciatis? Assumenda in voluptatem a corrupti quas id. Nostrum, facilis dicta? Consequatur est magni dolorum quibusdam magnam. Explicabo pariatur facere omnis minus corporis neque maiores officiis cum ipsa.</p>
+				<div className="cardBox">
+					<p className="cardTitle">{positionInfo.title}</p>
+					<p className="cardCompany">{positionInfo.company.name.toUpperCase()}</p>
+					<p className="cardText"><strong>Publication date: </strong>{new Date(positionInfo.created_at).toLocaleDateString()}</p>
+					<ActionsLine />
+					<p className="cardText"><strong>Number of applicants: </strong>{applicants}</p>
+					<p className="cardText"><strong>Location: </strong>{positionInfo.location}</p>
+					<p className="cardText"><strong>Mode: </strong>{positionInfo.mode}</p>
+					<p className="cardText"><strong>Salary: </strong>{positionInfo.salary}</p>
+					<p className="cardText"><strong>REQUIRED SKILLS:</strong></p>
+					<div className="skillContainer">
+						<SkillList />
+					</div>
+					<p className="cardText"><strong>DESCRIPTION:</strong></p>
+					<p className="cardText">{positionInfo.description}</p>
+					<p className="cardText">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, ipsum consectetur distinctio ullam harum nostrum ducimus quod quo omnis incidunt quas ut, sint, error quia maiores magni. Consequuntur eum assumenda molestiae nobis excepturi fugit, saepe aperiam dicta inventore doloremque facere accusantium, laudantium ipsam et autem dignissimos, velit odit? Asperiores, veniam? Provident nostrum sunt suscipit blanditiis, voluptas in ipsam adipisci laboriosam consequuntur, eum fugiat, dolores rem optio aperiam doloremque aliquam natus labore maxime perspiciatis? Assumenda in voluptatem a corrupti quas id. Nostrum, facilis dicta? Consequatur est magni dolorum quibusdam magnam. Explicabo pariatur facere omnis minus corporis neque maiores officiis cum ipsa.</p>
+				</div>
+			</div>
+			<div className="detailsBox applicantsBoxColor">
+				<div className="cardBox">
+					<p className="cardHeading">APPLICANTS</p>
+				</div>
 			</div>
 		</div>
 	)
