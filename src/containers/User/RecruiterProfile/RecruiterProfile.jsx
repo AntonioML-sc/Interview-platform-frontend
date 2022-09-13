@@ -129,24 +129,25 @@ const RecruiterProfile = () => {
          )
       }
    }
-   
+
    // render a test card for each test
    const TestList = () => {
-      if (userInfo?.data.tests.length > 0) {         
-         for (const index in userInfo.data.tests) {
-            test = (userInfo.data.tests[index])
-            return (
+      if (userInfo?.data.tests.length > 0) {     
+          
+         return (
+            userInfo.data.tests.map((test, index) => (
                <div className="userInfoItem" key={index}>
                   <p className="userInfoHeading"> Test {index * 1 + 1} </p>
                   <p className="userInfoText">Date: {new Date(test.date).toLocaleDateString()}</p>
                   <p className="userInfoText">Skills:</p>
                   <div className="skillContainer">
-                     <SkillTestList />
+                     <SkillTestList data={test.skills} />
                   </div>                  
                   <button id="detailsButton">See details</button>
                </div>
-            )
-         }
+            ))
+         )
+
       } else {
 
          return (
@@ -154,12 +155,13 @@ const RecruiterProfile = () => {
          )
       }
    }
-
+   
    // render a skill tag for each test skill
-   const SkillTestList = () => {
-      if (test.skills.length > 0) {
+   const SkillTestList = (skills) => {
+      if (skills.data.length > 0) {
+
          return (
-            test.skills.map((skill, index) => (
+            skills.data.map((skill, index) => (
                <p key={index} className="skillTag">{skill.title}</p>
             ))
          )
