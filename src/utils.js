@@ -9,6 +9,10 @@ const evalNaturalNumber = (st) => {
     return /^\d+$/.test(st);
 }
 
+const evalOneToTenNumber = (st) => {
+    return /^\d+$/.test(st) && (st * 1 >= 0) && (st * 1 <= 10);
+}
+
 const evalPhone = (st) => {
     return /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/.test(st);
 }
@@ -65,6 +69,7 @@ const evalField = (key, value) => {
         case 'location': return evalTitle(value);
         case 'mode': return evalTitle(value);
         case 'name': return evalName(value);
+        case 'one_to_ten': return evalOneToTenNumber(value);
         default: return false;
     }
 }

@@ -2,8 +2,9 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { userData } from "../../User/userSlice"
-import { selectTest } from "../skillTestSlice"
+import { evalField } from "../../../utils"
+import { refreshUserData, userData } from "../../User/userSlice"
+import { gradeTest, selectTest } from "../skillTestSlice"
 import "./GradeTest.scss"
 
 const GradeTest = () => {
@@ -29,12 +30,38 @@ const GradeTest = () => {
          ...register,
          [event.target.name]: event.target.value
       })
-      console.log(register)
    }
 
    // handler to test if the info stored in hook is correct and register position in that case
    const testGrade = async (event) => {
-      console.log("register")
+      event.preventDefault()
+
+      // function to set an error with custon message in register hook
+      const setRegisterError = (value, message) => {
+         setRegister({
+            ...register,
+            isError: value,
+            message: message
+         });
+      }
+
+      // form inputs to validate
+      const validations = Object.entries(register).map(value => {return ['one_to_ten', value[1], 'Invalid mark']})
+
+      // apply evals and register position if everything is ok
+      for (let index in validations) {
+         if (!evalField(validations[index][0], validations[index][1])) {
+            setRegisterError(true, validations[index][2])
+            return
+         } else if (index == validations.length - 1) {
+            setRegisterError(false, '')
+            const userToken = userInfo?.token
+            const body = {skills: Object.entries(register).map(value => {return {id: value[0], mark: value[1]}})}
+            dispatch(gradeTest(testInfo.id, body, userToken))
+            dispatch(refreshUserData())
+            setTimeout(() => navigate("/"), 1000)
+         }
+      }
    }
 
    // ------------ RENDER FUNCTIONS ------------ \\
@@ -61,6 +88,9 @@ const GradeTest = () => {
                   <button className="registerSubmit" type="submit">Register</button>
                </div>
             </form>
+            
+            <p className="errorMessage">{register.isError ? register.message : ''}</p>
+            <p className="errorMessage">{testInfo.isError ? testInfo.errorMessage : testInfo.successMessage}</p>
          </div>
       </div>
    )
