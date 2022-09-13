@@ -1,21 +1,36 @@
-
-#GradeTest{
+#GradeTest {
     width: 100vw;
-    height: 80vh;
+    min-height: 80vh;
     background-color: darkgrey;
 
-    .wellcomeMessageBox{
+    .mainBox {
+        min-height: 80vh;
         height: 100%;
         background-color: aquamarine;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
 
-        p{
-            font-size: 2em;
-            color: white;
+        .title {
+            font-size: 1.2em;
             font-weight: bold;
-            background-color: rgb(1, 82, 82);
+        }
+
+        .registerItem {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 12em;
+            justify-content: space-between;
+
+            .registerLabel {
+                font-weight: bold;
+            }
+
+            .registerInput {
+                width: 5em;
+            }
         }
     }
 }
