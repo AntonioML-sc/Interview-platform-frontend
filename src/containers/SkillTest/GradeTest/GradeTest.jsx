@@ -12,7 +12,7 @@ const GradeTest = () => {
    const navigate = useNavigate()
 
    useEffect(() => {
-      if (!userInfo?.data || !testInfo || testInfo == "") {
+      if (!userInfo?.data || !testInfo?.id) {
          navigate('/')
       }
    }, [])
@@ -20,7 +20,7 @@ const GradeTest = () => {
    return (
       <div id="GradeTest">
          <div className="wellcomeMessageBox">
-            <p>HOME PAGE</p>
+            <p>GRADE TEST PAGE</p>
          </div>
       </div>
    )

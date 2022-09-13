@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { setPosition } from "../../Position/positionsSlice"
 import { setSkill } from "../../Skill/skillSlice"
+import { setTest } from "../../SkillTest/skillTestSlice"
 import { userData } from "../userSlice"
 import "./RecruiterProfile.scss"
 
@@ -42,6 +43,14 @@ const RecruiterProfile = () => {
       dispatch(setSkill(skill))
       setTimeout(() => {
          navigate('/skill-update')
+      }, 500)
+   }
+
+   // save in redux the skill to update or delete and go to update skill page on click
+   const goToGradeTest = (test) => {
+      dispatch(setTest(test))
+      setTimeout(() => {
+         navigate('/test-grade')
       }, 500)
    }
 
@@ -132,18 +141,23 @@ const RecruiterProfile = () => {
 
    // render a test card for each test
    const TestList = () => {
-      if (userInfo?.data.tests.length > 0) {     
-          
+      if (userInfo?.data.tests.length > 0) {
+
          return (
             userInfo.data.tests.map((test, index) => (
                <div className="userInfoItem" key={index}>
-                  <p className="userInfoHeading"> Test {index * 1 + 1} </p>
+                  {test.users[0].id != userInfo.data.id &&
+                     <p className="userInfoHeading">{test.users[0].first_name} {test.users[0].last_name}</p>
+                  }
+                  {test.users[1].id != userInfo.data.id &&
+                     <p className="userInfoHeading">{test.users[0].first_name} {test.users[0].last_name}</p>
+                  }
                   <p className="userInfoText">Date: {new Date(test.date).toLocaleDateString()}</p>
                   <p className="userInfoText">Skills:</p>
                   <div className="skillContainer">
                      <SkillTestList data={test.skills} />
-                  </div>                  
-                  <button id="detailsButton">See details</button>
+                  </div>
+                  <button id="detailsButton" onClick={event => goToGradeTest(test)}>Grade test</button>
                </div>
             ))
          )
@@ -155,14 +169,14 @@ const RecruiterProfile = () => {
          )
       }
    }
-   
+
    // render a skill tag for each test skill
    const SkillTestList = (skills) => {
       if (skills.data.length > 0) {
 
          return (
             skills.data.map((skill, index) => (
-               <p key={index} className="skillTag">{skill.title}</p>
+               <p key={index} className="skillTag">{skill.title}: <strong>{skill.marks.mark}/10</strong></p>
             ))
          )
       } else {
@@ -241,7 +255,7 @@ const RecruiterProfile = () => {
          </div>
       )
    }
-   
+
    // render tests that user is implied in
    const UserTests = () => {
       return (
@@ -266,7 +280,7 @@ const RecruiterProfile = () => {
             </div>
          </div>
       )
-   }   
+   }
 }
 
 export default RecruiterProfile
