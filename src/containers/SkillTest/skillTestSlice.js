@@ -4,7 +4,7 @@ import axios from "axios";
 export const skillTestSlice = createSlice({
     name: "skillTest",
     initialState: {
-        test: {},
+        test: "",
         userId: ""
     },
     reducers: {

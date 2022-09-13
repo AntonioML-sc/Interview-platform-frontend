@@ -1,0 +1,21 @@
+
+#GradeTest{
+    width: 100vw;
+    height: 80vh;
+    background-color: darkgrey;
+
+    .wellcomeMessageBox{
+        height: 100%;
+        background-color: aquamarine;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        p{
+            font-size: 2em;
+            color: white;
+            font-weight: bold;
+            background-color: rgb(1, 82, 82);
+        }
+    }
+}
