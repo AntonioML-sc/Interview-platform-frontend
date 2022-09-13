@@ -80,14 +80,18 @@ const ApplicantProfile = () => {
           
          return (
             userInfo.data.tests.map((test, index) => (
-               <div className="userInfoItem" key={index}>
-                  <p className="userInfoHeading"> Test {index * 1 + 1} </p>
+               <div className="userInfoItem" key={index}>                  
+                  {test.users[0].id != userInfo.data.id &&
+                     <p className="userInfoHeading">Examiner: {test.users[0].first_name} {test.users[0].last_name} | {test.users[0].email}</p>
+                  }
+                  {test.users[1].id != userInfo.data.id &&
+                     <p className="userInfoHeading">Examiner: {test.users[0].first_name} {test.users[0].last_name} | {test.users[0].email}</p>
+                  }
                   <p className="userInfoText">Date: {new Date(test.date).toLocaleDateString()}</p>
-                  <p className="userInfoText">Skills:</p>
+                  <p className="userInfoText">Time: {new Date(test.date).toLocaleTimeString()}</p>
                   <div className="skillContainer">
                      <SkillTestList data={test.skills} />
-                  </div>                  
-                  <button id="detailsButton">See details</button>
+                  </div>
                </div>
             ))
          )
@@ -106,7 +110,7 @@ const ApplicantProfile = () => {
 
          return (
             skills.data.map((skill, index) => (
-               <p key={index} className="skillTag">{skill.title}</p>
+               <p key={index} className="skillTag">{skill.title}: <strong>{skill.marks.mark}/10</strong></p>
             ))
          )
       } else {
