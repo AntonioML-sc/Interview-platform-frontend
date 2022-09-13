@@ -147,13 +147,13 @@ const RecruiterProfile = () => {
             userInfo.data.tests.map((test, index) => (
                <div className="userInfoItem" key={index}>
                   {test.users[0].id != userInfo.data.id &&
-                     <p className="userInfoHeading">{test.users[0].first_name} {test.users[0].last_name}</p>
+                     <p className="userInfoHeading">Examinee: {test.users[0].first_name} {test.users[0].last_name} | {test.users[0].email}</p>
                   }
                   {test.users[1].id != userInfo.data.id &&
-                     <p className="userInfoHeading">{test.users[0].first_name} {test.users[0].last_name}</p>
+                     <p className="userInfoHeading">Examinee: {test.users[0].first_name} {test.users[0].last_name} | {test.users[0].email}</p>
                   }
                   <p className="userInfoText">Date: {new Date(test.date).toLocaleDateString()}</p>
-                  <p className="userInfoText">Skills:</p>
+                  <p className="userInfoText">Time: {new Date(test.date).toLocaleTimeString()}</p>
                   <div className="skillContainer">
                      <SkillTestList data={test.skills} />
                   </div>
