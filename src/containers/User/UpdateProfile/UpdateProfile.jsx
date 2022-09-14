@@ -12,7 +12,7 @@ const UpdateProfile = () => {
 
    // data related to skill search
    let [skillLists, setSkillLists] = useState({
-      userSkillList: [],
+      userSkillList: userInfo?.data.skills,
       otherSkillList: [],
       searchWord: "",
       myTimeOut: 0,
@@ -21,10 +21,10 @@ const UpdateProfile = () => {
 
    // data to update user
    const [register, setRegister] = useState({
-      title: '',
-      description: '',
-      phone: '',
-      email: '',
+      title: userInfo?.data.title,
+      description: userInfo?.data.description,
+      phone: userInfo?.data.phone,
+      email: userInfo?.data.email,
       isError: false,
       message: ''
    })
@@ -161,20 +161,20 @@ const UpdateProfile = () => {
             <p>Update profile</p>
             <form onSubmit={userUpdate}>
                <div className="registerItem">
-                  <label className="registerLabel">Title</label>
-                  <input className="registerInput" onChange={handleInput} type="text" name="title" />
+                  <label className="registerLabel">Title:</label>
+                  <input className="registerInput" onChange={handleInput} type="text" value={register.title} name="title" />
                </div>
                <div className="registerItem">
-                  <label className="registerLabel">Phone</label>
-                  <input className="registerInput" onChange={handleInput} type="text" name="phone" />
+                  <label className="registerLabel">Phone:</label>
+                  <input className="registerInput" onChange={handleInput} type="text" value={register.phone} name="phone" />
                </div>
                <div className="registerItem">
-                  <label className="registerLabel">Email</label>
-                  <input className="registerInput" onChange={handleInput} type="email" name="email" />
+                  <label className="registerLabel">Email:</label>
+                  <input className="registerInput" onChange={handleInput} type="email" value={register.email} name="email" />
                </div>
                <div className="registerItem">
-                  <label className="registerLabel">Description</label>
-                  <input className="registerInput" onChange={handleInput} type="text" name="description" />
+                  <label className="registerLabel">Description:</label>
+                  <input className="registerInput" onChange={handleInput} type="text" value={register.description} name="description" />
                </div>
 
                <div className="registerItem">
