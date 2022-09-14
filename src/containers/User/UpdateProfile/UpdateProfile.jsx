@@ -15,7 +15,8 @@ const UpdateProfile = () => {
       userSkillList: [],
       otherSkillList: [],
       searchWord: "",
-      myTimeOut: 0
+      myTimeOut: 0,
+      lastChange: ""
    })
 
    // data to update user
@@ -58,7 +59,7 @@ const UpdateProfile = () => {
          }
       }
       fetchSkills()
-   }, [skillLists.searchWord])
+   }, [skillLists.searchWord, skillLists.lastChange])
 
    // ------------ EVENT HANDLERS ------------ \\
 
@@ -93,10 +94,33 @@ const UpdateProfile = () => {
 
    // add the clicked skill tag from general skill list to user skill list
    const addToUserSkillList = (skill) => {
+      const check = () => {
+
+         return (skillLists.userSkillList.every(value => { return value.id != skill.id }))
+      }
+      if (check()) {
+         setSkillLists({
+            ...skillLists,
+            userSkillList: [...skillLists.userSkillList, skill],
+            lastChange: "in:" + skill.id
+         })
+      }
    }
 
    // remove the clicked skill tag from position required skill list
    const removeFromUserSkillList = (skill) => {
+      let userSkills = skillLists.userSkillList
+      for (const key in userSkills) {
+         if (userSkills[key].id == skill.id) {
+            userSkills.splice(key, 1)
+         }
+      }
+
+      setSkillLists({
+         ...skillLists,
+         userSkillList: userSkills,
+         lastChange: "out:" + skill.id
+      })
    }
 
    // ------------ RENDER FUNCTIONS ------------ \\
@@ -116,12 +140,12 @@ const UpdateProfile = () => {
       }
    }
 
-   // renders positionSkillList
+   // renders userSkillList
    const UserSkillList = () => {
       if (skillLists.userSkillList.length > 0) {
 
          return (
-            skillLists.positionSkillList.map((skill, index) => (
+            skillLists.userSkillList.map((skill, index) => (
                <p key={index} className="skillTag" onClick={event => removeFromUserSkillList(skill)} >{skill.title}</p>
             ))
          )
