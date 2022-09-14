@@ -1,4 +1,5 @@
 
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -31,7 +32,33 @@ const UpdateProfile = () => {
       if (!userInfo?.data) {
          navigate('/')
       }
-   }, [])
+      const fetchSkills = async () => {
+         try {
+            if (skillLists.searchWord == "") {
+               await axios.get('https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/skills/get-all')
+                  .then(resp => {
+                     const showList = resp.data.data.filter(skill => { return skillLists.userSkillList.every(sk => {return sk.id != skill.id}) })
+                     setSkillLists({
+                        ...skillLists,
+                        otherSkillList: showList
+                     })
+                  })
+            } else {
+               await axios.get(`https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/skills/get-by-title/${skillLists.searchWord}`)
+                  .then(resp => {
+                     const showList = resp.data.data.filter(skill => { return skillLists.userSkillList.every(sk => {return sk.id != skill.id}) })
+                     setSkillLists({
+                        ...skillLists,
+                        otherSkillList: showList
+                     })
+                  })
+            }
+         } catch (error) {
+            console.log(error)
+         }
+      }
+      fetchSkills()
+   }, [skillLists.searchWord])
 
    // ------------ EVENT HANDLERS ------------ \\
 
@@ -49,6 +76,19 @@ const UpdateProfile = () => {
 
    // handler for skill search
    const handleChange = (event) => {
+      if (skillLists.myTimeOut != 0) {
+         clearInterval(skillLists.myTimeOut)
+      }
+      setSkillLists({
+         ...skillLists,
+         myTimeOut: setTimeout(() => {
+            setSkillLists({
+               ...skillLists,
+               searchWord: event.target.value,
+               myTimeOut: 0
+            })
+         }, 400)
+      })
    }
 
    // add the clicked skill tag from general skill list to user skill list
