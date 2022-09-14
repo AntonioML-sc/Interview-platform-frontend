@@ -100,7 +100,7 @@ export const loginUser = (body) => async (dispatch) => {
 
 export const refreshUserData = () => async (dispatch, getState) => {
     const userInfo = getState().user
-    
+
     try {
         const config = {
             headers: { "Authorization": `Bearer ${userInfo.token}` }
@@ -124,7 +124,7 @@ export const updateProfile = (body) => async (dispatch, getState) => {
         }
         const userUpdate = await axios.put('https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/my-profile/update', body, config);
 
-        if (userUpdate.status === 200) {
+        if (userUpdate.status === 200 || userUpdate.status === 201) {
             const userProfile = await axios.get('https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/my-profile', config);
             const profileData = {
                 "data": userProfile.data.data
@@ -136,7 +136,7 @@ export const updateProfile = (body) => async (dispatch, getState) => {
     }
 }
 
-export const { register, login, logout, logError, refresh } = userSlice.actions;
+export const { register, login, logout, logError, refresh, update } = userSlice.actions;
 
 export const userData = (state) => state.user;
 

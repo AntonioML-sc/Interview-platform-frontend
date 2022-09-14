@@ -3,12 +3,14 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { userData } from "../userSlice";
+import { evalField } from "../../../utils";
+import { updateProfile, userData } from "../userSlice";
 import "./UpdateProfile.scss"
 
 const UpdateProfile = () => {
    const userInfo = useSelector(userData)
    const navigate = useNavigate()
+   const dispatch = useDispatch()
 
    // data related to skill search
    let [skillLists, setSkillLists] = useState({
@@ -73,6 +75,54 @@ const UpdateProfile = () => {
 
    // handler to test if the info stored in hook is correct and update user profile in that case
    const userUpdate = async (event) => {
+      event.preventDefault()
+
+      // function to set an error with custon message in register hook
+      const setRegisterError = (value, message) => {
+         setRegister({
+            ...register,
+            isError: value,
+            message: message
+         });
+      }
+
+      // form inputs to validate
+      const validations = [
+         ['title', register.title, 'Invalid title format'],
+         ['phone', register.phone, 'Invalid phone format'],
+         ['email', register.email, 'Invalid email format'],
+         ['description', register.description, 'Invalid description format'],
+      ]
+
+      // function to build an array of objects with skills ids from an array of skills
+      const makeSkillIdArray = (skillsArray) => {
+         
+         return skillsArray.map(value => {return {"id": value.id}})
+      }
+
+      // apply evals and register position if everything is ok
+      for (let index in validations) {
+         if (!evalField(validations[index][0], validations[index][1])) {
+            setRegisterError(true, validations[index][2])
+            return
+         } else if (index == validations.length - 1) {
+            setRegisterError(false, 'validation ok')
+            const userNewSkills = makeSkillIdArray(skillLists.userSkillList)
+            const userInitialSkills = makeSkillIdArray(userInfo.data.skills)
+            const skillsToAttach = userNewSkills.filter(skill => {return userInitialSkills.every(sk => {return sk.id != skill.id})})
+            const skillsToDetach = userInitialSkills.filter(skill => {return userNewSkills.every(sk => {return sk.id != skill.id})})
+            const body = {
+               title: register.title,
+               phone: register.phone,
+               email: register.email,
+               description: register.description,
+               skills_to_attach: skillsToAttach,
+               skills_to_detach: skillsToDetach
+            }
+            dispatch(updateProfile(body))
+            setTimeout(() => navigate("/"), 3000)
+         }
+      }
    }
 
    // handler for skill search
@@ -109,7 +159,7 @@ const UpdateProfile = () => {
 
    // remove the clicked skill tag from position required skill list
    const removeFromUserSkillList = (skill) => {
-      let userSkills = skillLists.userSkillList
+      let userSkills = [].concat(skillLists.userSkillList)
       for (const key in userSkills) {
          if (userSkills[key].id == skill.id) {
             userSkills.splice(key, 1)
