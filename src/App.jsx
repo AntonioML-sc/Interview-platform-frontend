@@ -16,6 +16,7 @@ import Skills from './containers/Skill/Skills/Skills'
 import UpdateSkill from './containers/Skill/UpdateSkill/UpdateSkill'
 import CreateTest from './containers/SkillTest/CreateTest/CreateTest'
 import GradeTest from './containers/SkillTest/GradeTest/GradeTest'
+import UpdateProfile from './containers/User/UpdateProfile/UpdateProfile'
 
 import './App.scss'
 
@@ -34,6 +35,7 @@ function App() {
                <Route path='/register' element={<Register />} />
                <Route path='/profile-applicant' element={<ApplicantProfile />} />
                <Route path='/profile-recruiter' element={<RecruiterProfile />} />
+               <Route path='/profile-update' element={<UpdateProfile />} />
                <Route path='/company-register' element={<RegisterCompany />} />
                <Route path='/skill-register' element={<RegisterSkill />} />
                <Route path='/skills' element={<Skills />} />
