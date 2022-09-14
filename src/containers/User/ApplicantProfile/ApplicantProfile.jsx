@@ -35,6 +35,11 @@ const ApplicantProfile = () => {
          })
    }
 
+   // go to update profile on click
+   const goToUpdateProfile = () => {
+      navigate('/profile-update')
+   }
+
    // ------------ RENDER FUNCTIONS ------------ \\
 
    // render a skill tag for each user skill
@@ -58,7 +63,7 @@ const ApplicantProfile = () => {
       if (userInfo?.data.positions.length > 0) {
          return (
             userInfo.data.positions.map((position, index) => (
-               <div className="userInfoItem" key={index}>
+               <div className="userInfoItem column" key={index}>
                   <p className="userInfoHeading"> {position.title} </p>
                   <p className="userInfoText"> Company: {position.company.name} </p>
                   <p className="userInfoText"> Status: {position.application.status} </p>
@@ -80,7 +85,7 @@ const ApplicantProfile = () => {
           
          return (
             userInfo.data.tests.map((test, index) => (
-               <div className="userInfoItem" key={index}>                  
+               <div className="userInfoItem column" key={index}>                  
                   {test.users[0].id != userInfo.data.id &&
                      <p className="userInfoHeading">Examiner: {test.users[0].first_name} {test.users[0].last_name} | {test.users[0].email}</p>
                   }
@@ -128,19 +133,20 @@ const ApplicantProfile = () => {
             <div className="userInfoItem">
                <p className="userInfoSection">MY PROFILE</p>
             </div>
-            <div className="userInfoItem">
+            <div className="userInfoItem row">
                <p className="userInfoName">{userInfo.data.first_name} {userInfo.data.last_name}</p>
+               <button id="detailsButton" onClick={goToUpdateProfile}>Update profile</button>
             </div>
-            <div className="userInfoItem">
+            <div className="userInfoItem column">
                <p className="userInfoRole">Profile type: applicant</p>
                <p className="userInfoText">Date of creation: {new Date(userInfo.data.created_at).toLocaleDateString()}</p>
             </div>
-            <div className="userInfoItem">
-               <p className="userInfoHeading">CONTACT INFORMATION:</p>
+            <div className="userInfoItem column">
+               <p className="userInfoHeading">CONTACT:</p>
                <p className="userInfoText">Email: {userInfo.data.email}</p>
                <p className="userInfoText">Phone: {userInfo.data.phone}</p>
             </div>
-            <div className="userInfoItem">
+            <div className="userInfoItem column">
                <p className="userInfoHeading">PROFESSIONAL INFORMATION:</p>
                <p className="userInfoText">Title: {userInfo.data.title}</p>
                <p className="userInfoText">Skills:</p>
@@ -158,7 +164,7 @@ const ApplicantProfile = () => {
    const UserPositions = () => {
       return (
          <div className="userInfo">
-            <div className="userInfoItem">
+            <div className="userInfoItem column">
                <p className="userInfoSection">MY APPLICATIONS</p>
             </div>
             <PositionList />
@@ -170,7 +176,7 @@ const ApplicantProfile = () => {
    const UserTests = () => {
       return (
          <div className="userInfo">
-            <div className="userInfoItem">
+            <div className="userInfoItem column">
                <p className="userInfoSection">MY TESTS</p>
             </div>
             <TestList />
