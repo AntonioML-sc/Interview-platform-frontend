@@ -14,7 +14,6 @@ const RecruiterProfile = () => {
    const userInfo = useSelector(userData)
    const navigate = useNavigate()
    const dispatch = useDispatch()
-   let test
 
    useEffect(() => {
       if (!userInfo?.data) {
@@ -54,6 +53,10 @@ const RecruiterProfile = () => {
       }, 500)
    }
 
+   const goToUpdateProfile = () => {
+      navigate('/profile-update')
+   }
+
    // ------------ RENDER FUNCTIONS ------------ \\
 
    // render a skill tag for each skill that logged user have
@@ -78,7 +81,7 @@ const RecruiterProfile = () => {
          const adminSkillList = userInfo.data.skills.filter(value => { return value.pivot.creator })
          return (
             adminSkillList.map((skill, index) => (
-               <div className="userInfoItem" key={index}>
+               <div className="userInfoItem column" key={index}>
                   <p className="userInfoHeading">Title: {skill.title} </p>
                   <p className="userInfoText"><strong>Description:</strong> {skill.description} </p>
                   <button id="detailsButton" onClick={e => goToUpdateSkill(skill)} >Edit or delete</button>
@@ -98,7 +101,7 @@ const RecruiterProfile = () => {
       if (userInfo?.data.companies.length > 0) {
          return (
             userInfo.data.companies.map((company, index) => (
-               <div className="userInfoItem" key={index}>
+               <div className="userInfoItem column" key={index}>
                   <p className="userInfoHeading">Name: {company.name} </p>
                   <p className="userInfoText">Email: {company.email} </p>
                   <p className="userInfoText">Address: {company.address} </p>
@@ -120,7 +123,7 @@ const RecruiterProfile = () => {
       if (userInfo?.data.positions.length > 0) {
          return (
             userInfo.data.positions.map((position, index) => (
-               <div className="userInfoItem" key={index}>
+               <div className="userInfoItem column" key={index}>
                   <p className="userInfoHeading"> {position.title} </p>
                   <p className="userInfoText"> Company: {position.company.name} </p>
                   <p className="userInfoText"> Status: {position.application.status} </p>
@@ -145,7 +148,7 @@ const RecruiterProfile = () => {
 
          return (
             userInfo.data.tests.map((test, index) => (
-               <div className="userInfoItem" key={index}>
+               <div className="userInfoItem column" key={index}>
                   {test.users[0].id != userInfo.data.id &&
                      <p className="userInfoHeading">Examinee: {test.users[0].first_name} {test.users[0].last_name} | {test.users[0].email}</p>
                   }
@@ -194,19 +197,20 @@ const RecruiterProfile = () => {
             <div className="userInfoItem">
                <p className="userInfoSection">MY PROFILE</p>
             </div>
-            <div className="userInfoItem">
+            <div className="userInfoItem row">
                <p className="userInfoName">{userInfo.data.first_name} {userInfo.data.last_name}</p>
+               <button id="detailsButton" onClick={goToUpdateProfile}>Update profile</button>
             </div>
-            <div className="userInfoItem">
+            <div className="userInfoItem column">
                <p className="userInfoRole">Profile type: Recruiter</p>
                <p className="userInfoText">Date of creation: {new Date(userInfo.data.created_at).toLocaleDateString()}</p>
             </div>
-            <div className="userInfoItem">
+            <div className="userInfoItem column">
                <p className="userInfoHeading">CONTACT INFORMATION:</p>
                <p className="userInfoText">Email: {userInfo.data.email}</p>
                <p className="userInfoText">Phone: {userInfo.data.phone}</p>
             </div>
-            <div className="userInfoItem">
+            <div className="userInfoItem column">
                <p className="userInfoHeading">PROFESSIONAL INFORMATION:</p>
                <p className="userInfoText">Title: {userInfo.data.title}</p>
                <p className="userInfoText">Skills:</p>
