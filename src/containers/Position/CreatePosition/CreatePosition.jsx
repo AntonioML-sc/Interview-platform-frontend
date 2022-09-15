@@ -20,7 +20,8 @@ const CreatePosition = () => {
       positionSkillList: [],
       otherSkillList: [],
       searchWord: "",
-      myTimeOut: 0
+      myTimeOut: 0,
+      lastChange: ""
    })
 
    // data to register position
@@ -44,17 +45,19 @@ const CreatePosition = () => {
             if (skillLists.searchWord == "") {
                await axios.get('https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/skills/get-all')
                   .then(resp => {
+                     const showList = resp.data.data.filter(skill => { return skillLists.positionSkillList.every(sk => {return sk.id != skill.id}) })
                      setSkillLists({
                         ...skillLists,
-                        otherSkillList: resp.data
+                        otherSkillList: showList
                      })
                   })
             } else {
                await axios.get(`https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/skills/get-by-title/${skillLists.searchWord}`)
                   .then(resp => {
+                     const showList = resp.data.data.filter(skill => { return skillLists.positionSkillList.every(sk => {return sk.id != skill.id}) })
                      setSkillLists({
                         ...skillLists,
-                        otherSkillList: resp.data
+                        otherSkillList: showList
                      })
                   })
             }
@@ -63,7 +66,7 @@ const CreatePosition = () => {
          }
       }
       fetchSkills()
-   }, [skillLists.searchWord])
+   }, [skillLists.searchWord, skillLists.lastChange])
 
    // ------------ EVENT HANDLERS ------------ \\
 
@@ -145,7 +148,8 @@ const CreatePosition = () => {
       if (check()) {
          setSkillLists({
             ...skillLists,
-            positionSkillList: [...skillLists.positionSkillList, skill]
+            positionSkillList: [...skillLists.positionSkillList, skill],
+            lastChange: "in:" + skill.id
          })
       }
    }
@@ -161,7 +165,8 @@ const CreatePosition = () => {
 
       setSkillLists({
          ...skillLists,
-         positionSkillList: positionSkills
+         positionSkillList: positionSkills,
+         lastChange: "out:" + skill.id
       })
    }
 
@@ -169,25 +174,16 @@ const CreatePosition = () => {
 
    // renders otherSkillList
    const OtherSkillList = () => {
-      if (!skillLists.otherSkillList.data) {
+      if (skillLists.otherSkillList?.length > 0) {
 
          return (
-            <div></div>
+            skillLists.otherSkillList.map((skill, index) => (
+               <p key={index} className="skillTag" onClick={event => addToPositionSkillList(event, skill)} >{skill.title}</p>
+            ))
          )
       } else {
-         if (skillLists.otherSkillList?.data.length > 0) {
 
-            return (
-               skillLists.otherSkillList.data.map((skill, index) => (
-                  <p key={index} className="skillTag" onClick={event => addToPositionSkillList(event, skill)} >{skill.title}</p>
-               ))
-            )
-         } else {
-
-            return (
-               <div></div>
-            )
-         }
+         return (<div></div>)
       }
    }
 
@@ -202,9 +198,7 @@ const CreatePosition = () => {
          )
       } else {
 
-         return (
-            <div></div>
-         )
+         return ( <div></div> )
       }
    }
 
