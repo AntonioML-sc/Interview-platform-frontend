@@ -62,7 +62,7 @@ const Register = (props) => {
             return
          } else if (index == validations.length - 1) {
             setRegisterError(false, '')
-            dispatch(registerUser(register.role, register.lastName, register.firstName, register.email.toLowerCase, register.password, register.phone, register.title, register.description))
+            dispatch(registerUser(register.role.toLowerCase(), register.lastName, register.firstName, register.email.toLowerCase(), register.password, register.phone, register.title, register.description))
             setTimeout(() => navigate("/"), 3000)
          }
       }

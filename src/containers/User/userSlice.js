@@ -70,8 +70,14 @@ export const registerUser = (role, lastName, firstName, email, password, phone, 
 
         let response = user;
         if (response.status === 201 || response.status === 200) {
-            let data = response.data.user;
-            dispatch(register({ data, token: user.data.token }));
+            const config = {
+                headers: { "Authorization": `Bearer ${user.data.token}` }
+            }
+            const userProfile = await axios.get('https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/my-profile', config);
+            const profileData = {
+                "data": userProfile.data.data
+            }
+            dispatch(register({ ...profileData, token: user.data.token }));
         }
     } catch (error) {
         dispatch(logError(error));
