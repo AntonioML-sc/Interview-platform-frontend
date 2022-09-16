@@ -7,51 +7,54 @@
    flex-direction: column;
 
    .mainBox {
-      height: auto;
-      background-color: aquamarine;
+      height: 100%;
+      min-height: 80vh;
+      background-color: rgb(255, 239, 220);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
 
       .searchBar {
-         background-color: lightgrey;
+         background-color: rgb(133, 188, 210);
          text-align: center;
          display: flex;
          flex-direction: row;
          align-items: center;
          justify-content: center;
-         height: 5vh;
-         width: 100vw;
+         padding: 0.2em;
+         border-radius: 0 0 1em 1em;
 
          .searchBarForm {
             display: flex;
             flex-direction: row;
             align-items: center;
             justify-content: center;
-            margin-right: 2em;
+            margin: 0.2em 2em;
 
             .inputBox {
                border-color: grey;
-               color: black;
+               color: rgb(75, 75, 233);
+               font-size: 1.1em;
+               font-weight: bold;
                background-color: white;
                width: 15em;
-               height: 1.5em;
             }
          }
       }
 
-      .positionsList {         
-         background-color: lightgrey;
+      .positionsList {
+         background-color: rgb(133, 188, 210);
          border-radius: 1em;
          display: flex;
          flex-direction: column;
+         max-width: 800px;
+         min-width: 21em;
          width: 90vw;
-         min-height: 75vh;
          height: auto;
          margin: 1em;
          padding: 0.5em;
-         align-items: center;
+         align-items: stretch;
          justify-content: flex-start;
       }
    }

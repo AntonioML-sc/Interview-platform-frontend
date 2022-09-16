@@ -1,11 +1,10 @@
 
-import React from "react"
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import axios from "axios"
-import "./Positions.scss"
 import { useSelector, useDispatch } from "react-redux"
 import { selectPositionsList, setPositionsList } from "../positionsSlice"
 import PositionCard from "../../../components/PositionCard/PositionCard"
+import "./Positions.scss"
 
 const Positions = () => {
    const dispatch = useDispatch()
@@ -87,7 +86,7 @@ const Positions = () => {
                </form>
             </div>
             <div className="positionsList">
-               <PositionsList/>
+               <PositionsList />
             </div>
          </div>
       </div>
