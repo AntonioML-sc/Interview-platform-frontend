@@ -26,30 +26,30 @@ const Header = () => {
             <Navbar.Toggle aria-controls="responsive-navbar-nav" className="py-0 px-0 my-0 mx-3" />
             <Navbar.Collapse id="responsive-navbar-nav">
                <Nav className="me-auto">
-                  <Nav.Link as={Link} to="/" className="text-white mx-2">Home</Nav.Link>
-                  <Nav.Link as={Link} to="/positions" className="text-white mx-2">Positions</Nav.Link>
-                  <Nav.Link as={Link} to="/skills" className="text-white mx-2">Skills</Nav.Link>
+                  <Nav.Link as={Link} to="/" className="text-white fw-bold mx-2">Home</Nav.Link>
+                  <Nav.Link as={Link} to="/positions" className="text-white fw-bold mx-2">Positions</Nav.Link>
+                  <Nav.Link as={Link} to="/skills" className="text-white fw-bold mx-2">Skills</Nav.Link>
                </Nav>
                {!userInfo?.data &&
                   <Nav>
-                     <Nav.Link as={Link} to="/register" className="text-white mx-2" >Register</Nav.Link>
-                     <Nav.Link as={Link} to="/login" className="text-white mx-2" >Log In</Nav.Link>
+                     <Nav.Link as={Link} to="/register" className="text-white fw-bold mx-2" >Register</Nav.Link>
+                     <Nav.Link as={Link} to="/login" className="text-white fw-bold mx-2" >Log In</Nav.Link>
                   </Nav>
                }
                {userInfo?.data &&
                   <Nav>
                      {userInfo?.data.role_id == recruiterRoleId &&
                         <Nav>
-                           <Nav.Link as={Link} to="/position-create" className="text-white mx-2" >Create Position</Nav.Link>
-                           <Nav.Link as={Link} to="/company-register" className="text-white mx-2" >Register Company</Nav.Link>
-                           <Nav.Link as={Link} to="/skill-register" className="text-white mx-2" >Register Skill</Nav.Link>
-                           <Nav.Link as={Link} to="/profile-recruiter" className="text-white mx-2" >My Profile</Nav.Link>
+                           <Nav.Link as={Link} to="/position-create" className="text-white fw-bold mx-2" >Create Position</Nav.Link>
+                           <Nav.Link as={Link} to="/company-register" className="text-white fw-bold mx-2" >Register Company</Nav.Link>
+                           <Nav.Link as={Link} to="/skill-register" className="text-white fw-bold mx-2" >Register Skill</Nav.Link>
+                           <Nav.Link as={Link} to="/profile-recruiter" className="text-white fw-bold mx-2" >My Profile</Nav.Link>
                         </Nav>
                      }
                      {userInfo?.data.role_id != recruiterRoleId &&
-                        <Nav.Link as={Link} to="/profile-applicant" className="text-white mx-2" >My Profile</Nav.Link>
+                        <Nav.Link as={Link} to="/profile-applicant" className="text-white fw-bold mx-2" >My Profile</Nav.Link>
                      }
-                     <button id="logOutButton" onClick={getOut}>Log out</button>
+                     <button id="logOutButton" className="text-white fw-bold mx-2" onClick={getOut}>Log out</button>
                   </Nav>
                }
             </Navbar.Collapse>

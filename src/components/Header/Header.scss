@@ -1,13 +1,12 @@
 #Header {
     width: 100vw;
-    height: 10vh;
-    background-color: darkgrey;
 
     .black {
-        background-color: black;
+        background-color: rgb(53, 102, 121);
+        height: 6vh;
 
         #logOutButton{
-            background-color: black;
+            background-color: rgb(53, 102, 121);
             border: 0;
         }
     }
