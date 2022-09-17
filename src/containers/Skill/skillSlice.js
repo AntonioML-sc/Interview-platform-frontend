@@ -38,6 +38,11 @@ export const skillSlice = createSlice({
             errorMessage: ''
          }
       },
+      clear: (state, action) => {
+         return {
+            ...state.initialState
+         }
+      },
       logError: (state, action) => {
          return {
             ...state,
@@ -104,7 +109,7 @@ export const deleteSkill = (id, token) => async (dispatch) => {
       dispatch(logError(error));
    }
 };
-export const { setSkill, setSkillList, logError, register, update, eliminate } = skillSlice.actions
+export const { setSkill, setSkillList, logError, register, update, eliminate, clear } = skillSlice.actions
 
 export const selectSkill = (state) => state.skill.skill
 export const selectSkillList = (state) => state.skill.skillList

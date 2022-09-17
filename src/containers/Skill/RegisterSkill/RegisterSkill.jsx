@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { evalField } from "../../../utils";
 import { refreshUserData, userData } from "../../User/userSlice";
-import { registerSkill, selectSkillState, setSkill, setSkillList } from "../skillSlice";
+import { clear, registerSkill, selectSkillState } from "../skillSlice";
 import './RegisterSkill.scss'
 
 const RegisterSkill = () => {
@@ -61,10 +61,11 @@ const RegisterSkill = () => {
             setRegisterError(false, '')
             const userToken = userInfo?.token
             dispatch(registerSkill(register.title, register.description, userToken))
-            dispatch(setSkill(""))
-            dispatch(setSkillList([]))
             dispatch(refreshUserData())
-            setTimeout(() => navigate("/skills"), 1000)
+            setTimeout(() => {
+               navigate("/")
+               dispatch(clear())
+            }, 2000)
          }
       }
    }
