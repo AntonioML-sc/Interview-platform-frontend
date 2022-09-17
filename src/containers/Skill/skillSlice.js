@@ -108,5 +108,6 @@ export const { setSkill, setSkillList, logError, register, update, eliminate } =
 
 export const selectSkill = (state) => state.skill.skill
 export const selectSkillList = (state) => state.skill.skillList
+export const selectSkillState = (state) => state.skill
 
 export default skillSlice.reducer
