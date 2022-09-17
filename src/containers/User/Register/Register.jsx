@@ -71,50 +71,47 @@ const Register = (props) => {
    return (
       <div id="Register">
          <div className="mainBox">
-            <p>Create new account</p>
-            <form onSubmit={userRegister}>
+            <p className="formTitle" >Register now and start to enjoy our advanced features</p>
+            <form className="registerForm" onSubmit={userRegister}>
                <div className="registerItem">
-                  <label className="registerLabel">Role</label>
-                  <input className="registerInput" onChange={handleInput} type="text" name="role" />
+                  <label className="registerLabel">Profile type</label>
+                  <select className="registerInput" onChange={handleInput} name="role">
+                     <option value="applicant">Applicant</option>
+                     <option value="recruiter">Recruiter</option>
+                  </select>
                </div>
-
                <div className="registerItem">
                   <label className="registerLabel">Last name</label>
                   <input className="registerInput" onChange={handleInput} type="text" name="lastName" />
                </div>
-
                <div className="registerItem">
                   <label className="registerLabel">First name</label>
                   <input className="registerInput" onChange={handleInput} type="text" name="firstName" />
                </div>
-
                <div className="registerItem">
                   <label className="registerLabel">Email</label>
-                  <input className="registerInput" onChange={handleInput} type="text" name="email" />
+                  <input className="registerInput" onChange={handleInput} type="email" name="email" />
                </div>
-
                <div className="registerItem">
                   <label className="registerLabel">Password</label>
                   <input className="registerInput" onChange={handleInput} type="password" name="password" />
                </div>
-
                <div className="registerItem">
                   <label className="registerLabel">Title</label>
                   <input className="registerInput" onChange={handleInput} type="text" name="title" />
                </div>
-
                <div className="registerItem">
                   <label className="registerLabel">Phone</label>
                   <input className="registerInput" onChange={handleInput} type="text" name="phone" />
                </div>
-
-               <div className="registerItem">
+               <div className="registerItem inColumn">
                   <label className="registerLabel">Description</label>
-                  <input className="registerInput" onChange={handleInput} type="text" name="description" />
+                  <div className="descriptionContainer">
+                     <textarea className="registerInput description" onChange={handleInput} type="text" name="description" />
+                  </div>
                </div>
-
                <div className="registerItem">
-                  <button className="registerSubmit" type="submit">Register</button>
+                  <button className="detailsButton" type="submit">Register</button>
                </div>
             </form>
             <p className="errorMessage">{register.isError ? register.message : ''}</p>
