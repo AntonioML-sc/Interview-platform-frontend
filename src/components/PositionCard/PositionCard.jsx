@@ -23,7 +23,7 @@ const PositionCard = (props) => {
                 <p className="cardText">Salary: {props.data.salary}</p>
             </div>
             <div className="itemColumn">
-                <button id="detailsButton" onClick={goToPosition}>See details</button>
+                <button className="detailsButton" onClick={goToPosition}>See details</button>
             </div>
 
         </div>

@@ -1,9 +1,11 @@
+@import '../../variables.scss';
+
 .PositionCard {
    padding: 5px;
    margin: 5px;
-   background-color: white;
+   background-color: $textBoxBackground;
    border-radius: 5px;
-   border: 1px solid grey;
+   border: 1px solid $borderThin;
    height: auto;
    max-width: 800px;
    display: flex;
@@ -16,21 +18,21 @@
       flex-direction: column;
 
       .cardTitle {
-         color: rgb(75, 75, 233);
+         color: $titleText;
          font-weight: bold;
          font-size: 1.2em;
          margin: 2px;
       }
 
       .cardCompany {
-         color: black;
+         color: $textBoxFontColor;
          font-weight: bold;
          font-size: 1.1em;
          margin: 2px;
       }
 
       .cardText {
-         color: black;
+         color: $textBoxFontColor;
          margin: 2px;
       }
    }
@@ -39,17 +41,17 @@
       display: flex;
       flex-direction: column;
 
-      #detailsButton {
-         background-color: sandybrown;
-         border: solid 1px grey;
+      .detailsButton {
+         background-color: $buttonBackground;
+         border: solid 1px $borderThin;
          width: fit-content;
          padding: 2px 5px;
          margin: 5px 3px;
          border-radius: 5px;
       }
 
-      #detailsButton:hover {
-         background-color: red;
+      .detailsButton:hover {
+         background-color: $buttonBackgroundHover;
          font-weight: bold;
       }
    }
