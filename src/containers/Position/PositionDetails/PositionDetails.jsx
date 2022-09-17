@@ -6,8 +6,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { selectPosition, setPosition } from "../positionsSlice"
 import { userData } from "../../User/userSlice"
-import "./PositionDetails.scss"
 import { setUserId } from "../../SkillTest/skillTestSlice"
+import "./PositionDetails.scss"
 
 const PositionDetails = () => {
    const userInfo = useSelector(userData)
@@ -99,16 +99,16 @@ const PositionDetails = () => {
       switch (userInPosition) {
          case "admin":
 
-            return (<div><p className="msgText">- You are the admin of this position -</p></div>)
+            return (<p className="msgText">- You are the admin of this position -</p>)
          case "applicant":
 
-            return (<div><p className="msgText">- You have already applied for this position -</p></div>)
+            return (<p className="msgText">- You have already applied for this position -</p>)
          case "none":
 
-            return (<div><button id="detailsButton" onClick={applyForPosition}>Apply</button></div>)
+            return (<div className="tagsContainer"><button className="button" onClick={applyForPosition}>Apply</button></div>)
          case "no user":
 
-            return (<div><p className="msgText">- Log in or register to apply for this position -</p></div>)
+            return (<p className="msgText">- Log in or register to apply for this position -</p>)
          default:
 
             return (<div></div>)
@@ -135,8 +135,8 @@ const PositionDetails = () => {
                <p className="cardTitle">{user.first_name} {user.last_name}</p>
                <p className="cardText"><strong>{user.title.toUpperCase()}</strong></p>
                <p className="cardText"><strong>Contact: </strong>{user.email} | {user.phone}</p>
-               <div className="skillContainer">
-                  <button id="detailsButton" onClick={e => goToCreateTest(user.id)}>Schedule test</button>
+               <div className="tagsContainer">
+                  <button className="button" onClick={e => goToCreateTest(user.id)}>Schedule test</button>
                </div>
             </div>
          ))
@@ -159,7 +159,7 @@ const PositionDetails = () => {
                <p className="cardText"><strong>Mode: </strong>{positionInfo.mode}</p>
                <p className="cardText"><strong>Salary: </strong>{positionInfo.salary}</p>
                <p className="cardText"><strong>REQUIRED SKILLS:</strong></p>
-               <div className="skillContainer">
+               <div className="tagsContainer">
                   <SkillList />
                </div>
                <p className="cardText"><strong>DESCRIPTION:</strong></p>

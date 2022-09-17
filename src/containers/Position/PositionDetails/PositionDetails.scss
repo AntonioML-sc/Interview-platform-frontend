@@ -1,7 +1,9 @@
+@import '../../../variables.scss';
+
 #PositionDetails {
    width: 100vw;
    min-height: 80vh;
-   background-color: rgb(255, 239, 220);
+   background-color: $generalBackground;
    display: flex;
    flex-direction: column;
    justify-content: flex-start;
@@ -9,7 +11,7 @@
    padding: 1em;
 
    .positionDetailsBoxColor {
-      background-color: rgb(133, 188, 210);
+      background-color: $containerBackground;
    }
 
    .detailsBox {
@@ -27,14 +29,14 @@
          padding: 5px;
          margin: 5px;
          height: 100%;
-         background-color: white;
+         background-color: $textBoxBackground;
          display: flex;
          flex-direction: column;
          border-radius: 5px;
-         border: 1px solid grey;
+         border: 1px solid $borderThin;
 
          .cardHeading {
-            color: rgb(75, 75, 233);
+            color: $titleText;
             font-weight: bold;
             font-size: 1.4em;
             margin: 3px 2em 3px 2em;
@@ -42,53 +44,54 @@
          }
 
          .cardTitle {
-            color: rgb(75, 75, 233);
+            color: $titleText;
             font-weight: bold;
             font-size: 1.4em;
             margin: 2px 2em 2px 2em;
          }
 
          .cardCompany {
-            color: black;
+            color: $textBoxFontColor;
             font-weight: bold;
             font-size: 1.2em;
             margin: 2px 2em 2px 2em;
          }
 
          .cardText {
-            color: black;
+            color: $textBoxFontColor;
             margin: 2px 2em 2px 2em;
          }
 
          .msgText {
-            color: rgb(75, 75, 233);
+            color: $msgFontColor;
+            font-style: italic;
             margin: 2px 2em 2px 2em;
          }
 
-         #detailsButton {
-            background-color: sandybrown;
-            border: solid 1px grey;
+         .button {
+            background-color: $buttonBackground;
+            border: solid 1px $borderThin;
             width: fit-content;
             padding: 2px 5px;
             margin: 2px;
             border-radius: 5px;
          }
 
-         #detailsButton:hover {
-            background-color: red;
+         .button:hover {
+            background-color: $buttonBackgroundHover;
             font-weight: bold;
          }
 
-         .skillContainer {
+         .tagsContainer {
             margin: 2px 2em 2px 2em;
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;
 
             .skillTag {
-               background-color: rgb(178, 231, 252);
-               color: black;
-               border: 1px solid rgb(75, 75, 233);
+               background-color: $skillTagBackground;
+               color: $skillTagText;
+               border: 1px solid $skillTagBorder;
                border-radius: 1em;
                padding: 1px 8px;
                margin: 3px 5px;
@@ -99,6 +102,6 @@
    }
 
    .applicantsBoxColor {
-      background-color: rgb(178, 231, 252);
+      background-color: $containerBackground;
    }
 }
