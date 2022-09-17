@@ -1,23 +1,23 @@
+@import '../../../variables.scss';
 
 #Skills{
     width: 100vw;
     min-height: 80vh;
     height: auto;
-    background-color: darkgrey;
     display: flex;
     flex-direction: column;
 
     .mainBox {
         height: 100%;
         min-height: 80vh;
-        background-color: rgb(255, 239, 220);
+        background-color: $generalBackground;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
   
         .searchBar {
-           background-color: rgb(133, 188, 210);
+           background-color: $menusBackground;
            text-align: center;
            display: flex;
            flex-direction: row;
@@ -34,18 +34,18 @@
               margin: 0.2em 2em;
   
               .inputBox {
-                 border-color: grey;
-                 color: rgb(75, 75, 233);
+                 border-color: $borderThin;
+                 color: $titleText;
                  font-size: 1.1em;
                  font-weight: bold;
-                 background-color: white;
+                 background-color: $textBoxBackground;
                  width: 15em;
               }
            }
         }
   
         .skillsList {         
-           background-color: rgb(133, 188, 210);
+           background-color: $containerBackground;
            border-radius: 1em;
            display: flex;
            flex-direction: column;

@@ -1,23 +1,25 @@
+@import '../../variables.scss';
+
 .SkillCard {
    padding: 5px;
-   margin: 3px;
-   background-color: white;
+   margin: 5px;
+   background-color: $textBoxBackground;
    border-radius: 5px;
-   border: 1px solid grey;
+   border: 1px solid $borderThin;
    height: auto;
    max-width: 800px;
    display: flex;
    flex-direction: column;
 
    .cardTitle {
-      color: rgb(75, 75, 233);
+      color: $titleText;
       font-weight: bold;
       font-size: 1.2em;
       margin: 2px;
    }
 
    .cardText {
-      color: black;
+      color: $textBoxFontColor;
       margin: 2px;
    }
 }
