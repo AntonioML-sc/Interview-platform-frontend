@@ -25,6 +25,11 @@ export const companySlice = createSlice({
             errorMessage: action.payload.message,
             successMessage: '',
          }
+      },
+      clear: (state, action) => {
+         return {
+            ...state.initialState
+         }
       }
    }
 })
@@ -51,8 +56,8 @@ export const registerCompany = (name, address, email, description, token) => asy
    }
 };
 
-export const { setCompany, logError, register } = companySlice.actions
+export const { setCompany, logError, register, clear } = companySlice.actions
 
-export const selectCompany = (state) => state.company.company
+export const selectCompany = (state) => state.company
 
 export default companySlice.reducer
