@@ -1,15 +1,17 @@
+@import '../../../variables.scss';
+
 #Register {
    width: 100vw;
    min-height: 80vh;
-   background-color: rgb(255, 239, 220);
+   background-color: $generalBackground;
    display: flex;
    flex-direction: column;
    align-items: center;
    justify-content: center;
 
    .mainBox {
-      background-color: rgb(133, 188, 210);
-      border: 0.1em solid rgb(53, 102, 121);
+      background-color: $containerBackground;
+      border: 0.1em solid $borderThick;
       border-radius: 1em;
       max-width: 90vw;
       min-width: 21em;
@@ -22,8 +24,8 @@
       justify-content: center;
 
       .formTitle {
-         background-color: sandybrown;
-         border: 0.1em solid rgb(53, 102, 121);
+         background-color: $titleBoxBackground;
+         border: 0.1em solid $borderThick;
          width: fit-content;
          padding: 2px 5px;
          margin: 5px 3px;
@@ -43,9 +45,9 @@
       .registerItem {
          padding: 3px;
          margin: 3px 3px 0;
-         background-color: white;
+         background-color: $textBoxBackground;
          border-radius: 5px;
-         border: 1px solid grey;
+         border: 1px solid $borderThin;
          height: auto;
          max-width: 800px;
          width: fit-content;
@@ -55,25 +57,25 @@
          align-items: center;
 
          .registerLabel {
-            color: black;
+            color: $textBoxFontColor;
             margin: 0 8px;
             width: 6em;
          }
 
          .registerInput {
             width: 20em;
-            background-color: rgb(255, 239, 220);
-            border: 0.1em solid rgb(53, 102, 121);
-            color: black;
+            background-color: $generalBackground;
+            border: 0.1em solid $borderThick;
+            color: $textBoxFontColor;
             border-radius: 5px;
             transition: 0.3s;
             padding: 0 2px;
          }
 
          .registerInput:focus {
-            background-color: white;
+            background-color: $textBoxBackground;
             outline: none;
-            border: 0.1em solid sandybrown;
+            border: 0.1em solid $buttonBackground;
             transition: 0.3s;
          }
 
@@ -90,8 +92,8 @@
          }
 
          .detailsButton {
-            background-color: sandybrown;
-            border: solid 1px grey;
+            background-color: $buttonBackground;
+            border: solid 1px $borderThin;
             width: fit-content;
             padding: 2px 5px;
             margin: 5px 3px;
@@ -99,7 +101,7 @@
          }
 
          .detailsButton:hover {
-            background-color: red;
+            background-color: $buttonBackgroundHover;
             font-weight: bold;
          }
       }
