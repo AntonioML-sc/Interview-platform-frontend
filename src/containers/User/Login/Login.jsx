@@ -64,11 +64,11 @@ const Login = () => {
    return (
       <div id="Login">
          <div className="mainBox">
-            <p>Login</p>
-            <form onSubmit={userLogin}>
+            <p className="formTitle" >Log In to use advanced features</p>
+            <form className="loginForm" onSubmit={userLogin}>
                <div className="loginItem">
                   <label className="loginLabel">Email</label>
-                  <input className="loginInput" onChange={handleInput} type="text" name="email" />
+                  <input className="loginInput" onChange={handleInput} type="email" name="email" />
                </div>
 
                <div className="loginItem">
@@ -77,7 +77,7 @@ const Login = () => {
                </div>
 
                <div className="loginItem">
-                  <button className="loginSubmit" type="submit">Login</button>
+                  <button className="detailsButton" type="submit">Log In</button>
                </div>
             </form>
             <p className="errorMessage">{msgError.isError ? msgError.message : ''}</p>

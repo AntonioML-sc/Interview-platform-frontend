@@ -1,22 +1,95 @@
-
-#Login{
+#Login {
     width: 100vw;
-    height: 80vh;
-    background-color: darkgrey;
+    min-height: 80vh;
+    background-color: rgb(255, 239, 220);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 
-    .mainBox{
-        height: 100%;
-        background-color: aquamarine;
+    .mainBox {
+        background-color: rgb(133, 188, 210);
+        border: 0.1em solid rgb(53, 102, 121);
+        border-radius: 1em;
+        max-width: 90vw;
+        min-width: 21em;
+        margin: 1em;
+        padding: 0.3em 0.3em 0;
+        height: fit-content;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
 
-        p{
-            font-size: 2em;
-            color: white;
+        .formTitle {
+            background-color: sandybrown;
+            border: 0.1em solid rgb(53, 102, 121);
+            width: fit-content;
+            padding: 2px 5px;
+            margin: 5px 3px;
+            border-radius: 5px;
+            font-size: 1.2em;
             font-weight: bold;
-            background-color: rgb(1, 82, 82);
+        }
+
+        .loginForm {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            margin-bottom: 0;
+        }
+
+        .loginItem {
+            padding: 3px;
+            margin: 3px 3px 0;
+            background-color: white;
+            border-radius: 5px;
+            border: 1px solid grey;
+            height: auto;
+            max-width: 800px;
+            width: fit-content;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+
+            .loginLabel {
+                color: black;
+                margin: 0 8px;
+                width: 6em;
+            }
+
+            .loginInput {
+                width: 20em;
+                background-color: rgb(255, 239, 220);
+                border: 0.1em solid rgb(53, 102, 121);
+                color: black;
+                border-radius: 5px;
+                transition: 0.3s;
+                padding: 0 2px;
+            }
+
+            .loginInput:focus {
+                background-color: white;
+                outline: none;
+                border: 0.1em solid sandybrown;
+                transition: 0.3s;
+            }
+
+            .detailsButton {
+                background-color: sandybrown;
+                border: solid 1px grey;
+                width: fit-content;
+                padding: 2px 5px;
+                margin: 5px 3px;
+                border-radius: 5px;
+            }
+
+            .detailsButton:hover {
+                background-color: red;
+                font-weight: bold;
+            }
         }
     }
 }
