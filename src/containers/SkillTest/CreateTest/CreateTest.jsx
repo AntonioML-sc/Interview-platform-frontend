@@ -42,7 +42,7 @@ const CreateTest = () => {
             if (skillLists.searchWord == "") {
                await axios.get('https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/skills/get-all')
                   .then(resp => {
-                     const showList = resp.data.data.filter(skill => { return skillLists.positionSkillList.every(sk => {return sk.id != skill.id}) })
+                     const showList = resp.data.data.filter(skill => { return skillLists.positionSkillList.every(sk => { return sk.id != skill.id }) })
                      setSkillLists({
                         ...skillLists,
                         otherSkillList: showList
@@ -51,7 +51,7 @@ const CreateTest = () => {
             } else {
                await axios.get(`https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/skills/get-by-title/${skillLists.searchWord}`)
                   .then(resp => {
-                     const showList = resp.data.data.filter(skill => { return skillLists.positionSkillList.every(sk => {return sk.id != skill.id}) })
+                     const showList = resp.data.data.filter(skill => { return skillLists.positionSkillList.every(sk => { return sk.id != skill.id }) })
                      setSkillLists({
                         ...skillLists,
                         otherSkillList: showList
@@ -96,8 +96,8 @@ const CreateTest = () => {
 
       // build an array with required skills' ids from array of skills (objects with id inside)
       const makeSkillIdArray = (skillsArray) => {
-         
-         return skillsArray.map(value => {return {"id": value.id}})
+
+         return skillsArray.map(value => { return { "id": value.id } })
       }
 
       // apply evals and register position if everything is ok
@@ -114,7 +114,7 @@ const CreateTest = () => {
                examinee_id: userIdInfo,
                skills: skillIdsArray
             }
-            dispatch(createTest(body, userToken))            
+            dispatch(createTest(body, userToken))
             dispatch(refreshUserData())
             setTimeout(() => navigate("/"), 1000)
          }
@@ -209,8 +209,8 @@ const CreateTest = () => {
    return (
       <div id="CreateTest">
          <div className="mainBox">
-            <p>Create new test</p>
-            <form onSubmit={testRegister}>
+            <p className="formTitle" >Create new test</p>
+            <form className="registerForm" onSubmit={testRegister}>
                <div className="registerItem">
                   <label className="registerLabel">Date</label>
                   <input className="registerInput" onChange={handleInput} type="text" placeholder="2022-09-30" name="date" />
@@ -220,33 +220,29 @@ const CreateTest = () => {
                   <input className="registerInput" onChange={handleInput} type="text" placeholder="17:30:00" name="time" />
                </div>
 
-               <div className="registerItem">
-                  <p className="registerLabel">Skills required</p>
-               </div>
-               <div className="positionSkillList">
-                  <PositionSkillList />
+               <div className="registerItem inColumn">
+                  <p className="registerTest">Skills required (click to remove)</p>
+                  <div className="testSkillList">
+                     <PositionSkillList />
+                  </div>
+                  <p className="registerText">Click to add skills</p>
+                  <div className="otherSkillContainer">
+                     <div className="searchBar">
+                        <form className="searchBarForm">
+                           <input className="inputBox" type="text" name="searchWord" onChange={handleChange} placeholder=" Search"></input>
+                        </form>
+                     </div>
+                     <div className="otherSkillList">
+                        <OtherSkillList />
+                     </div>
+                  </div>
                </div>
 
                <div className="registerItem">
                   <button className="registerSubmit" type="submit">Register</button>
                </div>
             </form>
-
-            <div className="registerItem">
-               <p className="registerLabel">Click to add skills</p>
-            </div>
-
-            <div className="otherSkillContainer">
-               <div className="searchBar">
-                  <form className="searchBarForm">
-                     <input className="inputBox" type="text" name="searchWord" onChange={handleChange} placeholder=" Search"></input>
-                  </form>
-               </div>
-               <div className="otherSkillList">
-                  <OtherSkillList />
-               </div>
-            </div>
-
+            
             <p className="errorMessage">{register.isError ? register.message : ''}</p>
             <p className="errorMessage">{userIdInfo.isError ? userIdInfo.errorMessage : userIdInfo.successMessage}</p>
          </div>
