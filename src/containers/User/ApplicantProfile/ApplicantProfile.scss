@@ -1,9 +1,11 @@
+@import '../../../variables.scss';
+
 #ApplicantProfile {
    width: 100vw;
    min-height: 80vh;
-   background-color: white;
 
    .mainBox {
+      background-color: $generalBackground;
       height: 100%;
       display: flex;
       flex-direction: column;
@@ -11,10 +13,11 @@
       justify-content: flex-start;
 
       .userInfo {
-         background-color: rgb(178, 231, 252);
-         border-radius: 5px;
+         background-color: $containerBackground;
+         border-radius: 10px;
          display: flex;
          flex-direction: column;
+         max-width: 1100px;
          width: 90vw;
          height: auto;
          margin: 1em;
@@ -38,14 +41,14 @@
          .userInfoItem {
             padding: 5px;
             margin: 3px;
-            background-color: white;
+            background-color: $textBoxBackground;
             border-radius: 5px;
-            border: 1px solid grey;
+            border: 1px solid $borderThin;
             height: auto;
             width: 100%;
 
             .userInfoSection {
-               color: rgb(75, 75, 233);
+               color: $titleText;
                font-weight: bold;
                font-size: 1.3em;
                margin: 2px;
@@ -53,7 +56,7 @@
             }
 
             .userInfoName {
-               color: rgb(75, 75, 233);
+               color: $titleText;
                font-weight: bold;
                font-size: 1.2em;
                margin: 2px;
@@ -62,21 +65,21 @@
             }
 
             .userInfoRole {
-               color: black;
+               color: $textBoxFontColor;
                margin: 2px;
                font-weight: bold;
                width: fit-content;
             }
 
             .userInfoHeading {
-               color: black;
+               color: $textBoxFontColor;
                margin: 3px;
                font-weight: bold;
                width: fit-content;
             }
 
             .userInfoText {
-               color: black;
+               color: $textBoxFontColor;
                margin: 2px;
                width: fit-content;
             }
@@ -88,9 +91,9 @@
                flex-wrap: wrap;
 
                .skillTag {
-                  background-color: rgb(178, 231, 252);
-                  color: black;
-                  border: 1px solid rgb(75, 75, 233);
+                  background-color: $skillTagBackground;
+                  color: $skillTagText;
+                  border: 1px solid $skillTagBorder;
                   border-radius: 1em;
                   padding: 1px 8px;
                   margin: 3px 5px 3px 0px;
@@ -99,8 +102,8 @@
             }
 
             #detailsButton {
-               background-color: sandybrown;
-               border: solid 1px grey;
+               background-color: $buttonBackground;
+               border: solid 1px $borderThin;
                width: fit-content;
                padding: 2px 5px;
                margin: 5px 3px;
@@ -108,7 +111,7 @@
             }
 
             #detailsButton:hover {
-               background-color: red;
+               background-color: $buttonBackgroundHover;
                font-weight: bold;
             }
          }
