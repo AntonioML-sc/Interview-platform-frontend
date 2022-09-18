@@ -100,24 +100,20 @@ const UpdateSkill = () => {
    return (
       <div id="UpdateSkill">
          <div className="mainBox">
-            <p>Update or delete skill</p>
-            <form onSubmit={skillUpdate}>
+            <p className="formTitle">Update or delete skill</p>
+            <form className="registerForm" onSubmit={skillUpdate}>
                <div className="registerItem">
                   <label className="registerLabel">Title</label>
                   <input className="registerInput" onChange={handleInput} value={skillData.title} type="text" name="title" />
                </div>
-
-               <div className="registerItem">
+               <div className="registerItem inColumn">
                   <label className="registerLabel">Description</label>
-                  <input className="registerInput" onChange={handleInput} value={skillData.description} type="text" name="description" />
+                  <textarea className="registerInput description" onChange={handleInput} value={skillData.description} type="text" name="description" />
                </div>
 
                <div className="registerItem">
-                  <button className="registerSubmit" type="submit">Update</button>
-               </div>
-
-               <div className="registerItem">
-                  <button className="registerSubmit" type="button" onClick={skillDelete} >Delete</button>
+                  <button className="detailsButton" type="submit">Update skill</button>
+                  <button className="detailsButton" type="button" onClick={skillDelete} >Delete skill</button>
                </div>
             </form>
             <p className="errorMessage">{skillData.isError ? skillData.message : ''}</p>
