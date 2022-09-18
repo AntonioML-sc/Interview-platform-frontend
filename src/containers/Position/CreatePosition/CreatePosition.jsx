@@ -45,7 +45,7 @@ const CreatePosition = () => {
             if (skillLists.searchWord == "") {
                await axios.get('https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/skills/get-all')
                   .then(resp => {
-                     const showList = resp.data.data.filter(skill => { return skillLists.positionSkillList.every(sk => {return sk.id != skill.id}) })
+                     const showList = resp.data.data.filter(skill => { return skillLists.positionSkillList.every(sk => { return sk.id != skill.id }) })
                      setSkillLists({
                         ...skillLists,
                         otherSkillList: showList
@@ -54,7 +54,7 @@ const CreatePosition = () => {
             } else {
                await axios.get(`https://aml-mysql-08-18-22-laravel-ip.herokuapp.com/api/skills/get-by-title/${skillLists.searchWord}`)
                   .then(resp => {
-                     const showList = resp.data.data.filter(skill => { return skillLists.positionSkillList.every(sk => {return sk.id != skill.id}) })
+                     const showList = resp.data.data.filter(skill => { return skillLists.positionSkillList.every(sk => { return sk.id != skill.id }) })
                      setSkillLists({
                         ...skillLists,
                         otherSkillList: showList
@@ -102,8 +102,8 @@ const CreatePosition = () => {
 
       // build an array with required skills' ids from array of skills (objects with id inside)
       const makeSkillIdArray = (skillsArray) => {
-         
-         return skillsArray.map(value => {return {"id": value.id}})
+
+         return skillsArray.map(value => { return { "id": value.id } })
       }
 
       // apply evals and register position if everything is ok
@@ -198,72 +198,64 @@ const CreatePosition = () => {
          )
       } else {
 
-         return ( <div></div> )
+         return (<div></div>)
       }
    }
 
    return (
       <div id="CreatePosition">
          <div className="mainBox">
-            <p>Create new position</p>
-            <form onSubmit={positionRegister}>
+            <p className="formTitle" >Register new position</p>
+            <form className="registerForm" onSubmit={positionRegister}>
                <div className="registerItem">
                   <label className="registerLabel">Title</label>
                   <input className="registerInput" onChange={handleInput} type="text" name="title" />
                </div>
-
                <div className="registerItem">
                   <label className="registerLabel">Company name</label>
                   <input className="registerInput" onChange={handleInput} type="text" name="companyName" />
                </div>
-
                <div className="registerItem">
                   <label className="registerLabel">Location</label>
                   <input className="registerInput" onChange={handleInput} type="text" name="location" />
                </div>
-
                <div className="registerItem">
                   <label className="registerLabel">Mode</label>
                   <input className="registerInput" onChange={handleInput} type="text" name="mode" />
                </div>
-
                <div className="registerItem">
                   <label className="registerLabel">Salary</label>
                   <input className="registerInput" onChange={handleInput} type="text" name="salary" />
                </div>
-
-               <div className="registerItem">
+               <div className="registerItem inColumn">
                   <label className="registerLabel">Description</label>
-                  <input className="registerInput" onChange={handleInput} type="text" name="description" />
+                  <textarea className="registerInput description" onChange={handleInput} type="text" name="description" />
+               </div>
+
+               <div className="registerItem inColumn">
+                  <p className="registerText">Skills required (Click to remove)</p>
+                  <div className="positionSkillList">
+                     <PositionSkillList />
+                  </div>
+                  <p className="registerText">Click to add skills</p>
+
+                  <div className="otherSkillContainer">
+                     <div className="searchBar">
+                        <form className="searchBarForm">
+                           <input className="inputBox" type="text" name="searchWord" onChange={handleChange} placeholder=" Search"></input>
+                        </form>
+                     </div>
+                     <div className="otherSkillList">
+                        <OtherSkillList />
+                     </div>
+                  </div>
                </div>
 
                <div className="registerItem">
-                  <p className="registerLabel">Skills required</p>
-               </div>
-
-               <div className="positionSkillList">
-                  <PositionSkillList />
-               </div>
-
-               <div className="registerItem">
-                  <button className="registerSubmit" type="submit">Register</button>
+                  <button className="detailsButton" type="submit">Register</button>
                </div>
             </form>
 
-            <div className="registerItem">
-               <p className="registerLabel">Click to add skills</p>
-            </div>
-
-            <div className="otherSkillContainer">
-               <div className="searchBar">
-                  <form className="searchBarForm">
-                     <input className="inputBox" type="text" name="searchWord" onChange={handleChange} placeholder=" Search"></input>
-                  </form>
-               </div>
-               <div className="otherSkillList">
-                  <OtherSkillList />
-               </div>
-            </div>
 
             <p className="errorMessage">{register.isError ? register.message : ''}</p>
             <p className="errorMessage">{positionsInfo.isError ? positionsInfo.errorMessage : positionsInfo.successMessage}</p>
