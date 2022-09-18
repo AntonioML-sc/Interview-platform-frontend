@@ -1,36 +1,103 @@
+@import '../../../variables.scss';
+
 #GradeTest {
-    width: 100vw;
-    min-height: 80vh;
-    background-color: darkgrey;
+   width: 100vw;
+   min-height: 80vh;
+   background-color: $generalBackground;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: flex-start;
 
-    .mainBox {
-        min-height: 80vh;
-        height: 100%;
-        background-color: aquamarine;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
+   .mainBox {
+      background-color: $containerBackground;
+      border: 0.1em solid $borderThick;
+      border-radius: 1em;
+      max-width: 90vw;
+      min-width: 21em;
+      margin: 1em;
+      padding: 0.3em 0.3em 0;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 
-        .title {
-            font-size: 1.2em;
+      .formTitle {
+         background-color: $titleBoxBackground;
+         border: 0.1em solid $borderThick;
+         width: fit-content;
+         padding: 2px 5px;
+         margin: 5px 3px;
+         border-radius: 5px;
+         font-size: 1.2em;
+         font-weight: bold;
+      }
+
+      .registerForm {
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: flex-start;
+         margin-bottom: 0;
+      }
+
+      .registerItem {
+         padding: 3px;
+         margin: 3px 3px 0;
+         background-color: $textBoxBackground;
+         border-radius: 5px;
+         border: 1px solid $borderThin;
+         height: auto;
+         max-width: 800px;
+         width: fit-content;
+         display: flex;
+         flex-direction: row;
+         justify-content: center;
+         align-items: center;
+         flex-wrap: wrap;
+
+         .registerLabel {
+            color: $textBoxFontColor;
+            margin: 0 8px;
+            width: 8em;
+            text-justify: initial;
+         }
+
+         .registerInput {
+            width: 10em;
+            background-color: $generalBackground;
+            border: 0.1em solid $borderThick;
+            color: $textBoxFontColor;
+            border-radius: 5px;
+            transition: 0.3s;
+            padding: 0 2px;
+         }
+
+         .registerInput:focus {
+            background-color: $textBoxBackground;
+            outline: none;
+            border: 0.1em solid $buttonBackground;
+            transition: 0.3s;
+         }
+
+         .registerSubmit {
+            background-color: $buttonBackground;
+            border: solid 1px $borderThin;
+            width: fit-content;
+            padding: 2px 5px;
+            margin: 5px 3px;
+            border-radius: 5px;
+         }
+
+         .registerSubmit:hover {
+            background-color: $buttonBackgroundHover;
             font-weight: bold;
-        }
+         }
+      }
 
-        .registerItem {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
-            width: 12em;
-            justify-content: space-between;
-
-            .registerLabel {
-                font-weight: bold;
-            }
-
-            .registerInput {
-                width: 5em;
-            }
-        }
-    }
+      .errorMessage {
+         color: $errorFontColor;
+      }
+   }
 }

@@ -70,12 +70,12 @@ const GradeTest = () => {
       <div id="GradeTest">
          <div className="mainBox">
             {testInfo.users[0].id != userInfo.data.id &&
-               <p className="title" >Grade test for {testInfo.users[0].first_name} {testInfo.users[0].last_name}</p>
+               <p className="formTitle" >Grade test for {testInfo.users[0].first_name} {testInfo.users[0].last_name}</p>
             }
             {testInfo.users[1].id != userInfo.data.id &&
-               <p className="title" >Grade test for {testInfo.users[1].first_name} {testInfo.users[1].last_name}</p>
+               <p className="formTitle" >Grade test for {testInfo.users[1].first_name} {testInfo.users[1].last_name}</p>
             }
-            <form onSubmit={testGrade}>
+            <form className="registerForm" onSubmit={testGrade}>
                {
                   testInfo.skills.map((skill, index) => (
                      <div key={index} className="registerItem">
