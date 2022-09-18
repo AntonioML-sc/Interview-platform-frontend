@@ -2,7 +2,7 @@
 
 #Footer {
    width: 100vw;
-   height: 14vh;
+   min-height: 14vh;
    background-color: $menusBackground;
    display: flex;
    flex-direction: row;
@@ -36,6 +36,14 @@
       a {
          font-size: 0.9em;
          color: white;
+      }
+   }
+
+   @media(max-width: 768px) {
+      .center {
+         flex: 0 0 100%;
+         order: 3;
+         margin-bottom: 1em;
       }
    }
 }
