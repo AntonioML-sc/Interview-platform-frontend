@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import "./Home.scss"
 import joinUsImg from "../../img/joinUsImg.png"
 import shakeHands from "../../img/shakeHands.jpg"
+import carpenter from "../../img/carpenter.jpg"
+import typingMan from "../../img/typingMan.jpg"
 
 const Home = () => {
    const navigate = useNavigate()
@@ -49,14 +51,18 @@ const Home = () => {
             <div className="rowSkills">
                <div className="rowImages">
                   <div className="skillImage1">
-                     <img className="homeImg" src="" alt="Skills image 1" />
+                     <h2>Highlight your skills and strengths...</h2>
+                     <img className="homeImg" src={carpenter} alt="Skills image" />
                   </div>
                   <div className="skillImage2">
-                     <img className="homeImg" src="" alt="Tests image" />
+                     <img className="homeImg" src={typingMan} alt="Tests image" />
+                     <h2>... or test your employees ones</h2>
                   </div>
                </div>
                <div className="skillsText">
-                  <p>Skills text</p>
+                  <p>Choose among thousands of registered skills or create your own. There are no limits for talent.</p>
+                  <p>Schedule and grade skill tests for the applicants that suits your needs and find the best match for your company!</p>                  
+                  <button id="largeButton" onClick={goToPositions}>Search skills</button>
                </div>
             </div>
             <div className="rowComingSoon">
