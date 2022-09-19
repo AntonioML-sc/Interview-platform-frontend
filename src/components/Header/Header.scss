@@ -1,12 +1,14 @@
+@import '../../variables.scss';
+
 #Header {
     width: 100vw;
 
     .black {
-        background-color: rgb(53, 102, 121);
+        background-color: $menusBackground;
         height: 6vh;
 
         #logOutButton{
-            background-color: rgb(53, 102, 121);
+            background-color: $menusBackground;
             border: 0;
         }
     }

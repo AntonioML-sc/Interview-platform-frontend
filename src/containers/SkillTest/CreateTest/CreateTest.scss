@@ -8,6 +8,7 @@
    flex-direction: column;
    align-items: center;
    justify-content: flex-start;
+
    .mainBox {
       background-color: $containerBackground;
       border: 0.1em solid $borderThick;
@@ -105,7 +106,6 @@
 
          .registerSubmit:hover {
             background-color: $buttonBackgroundHover;
-            font-weight: bold;
          }
 
          .testSkillList {
