@@ -1,21 +1,173 @@
+@import '../../variables.scss';
 
-#Home{
-    width: 100vw;
-    height: 80vh;
-    background-color: darkgrey;
+#Home {
+   width: 100vw;
+   min-height: 80vh;
+   background-color: $generalBackground;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: flex-start;
 
-    .wellcomeMessageBox{
-        height: 100%;
-        background-color: aquamarine;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+   .mainBox {
+      background-color: $containerBackground;
+      width: 90vw;
+      min-width: 400px;
+      margin-top: 1em;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 
-        p{
-            font-size: 2em;
-            color: white;
-            font-weight: bold;
-            background-color: rgb(1, 82, 82);
-        }
-    }
+      .rowJoinUs {
+         background-color: $textBoxBackground;
+         border-radius: 1em;
+         padding: 1em;
+         margin-bottom: 1em;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         width: 100%;
+
+         .joinUsImage {
+            background-color: lightgreen;
+            width: 100%;
+            height: 12em;
+         }
+
+         .joinUsText {
+            background-color: red;
+            width: 100%;
+            height: 12em;
+         }
+      }
+
+      .rowPositions {
+         background-color: $textBoxBackground;
+         border-radius: 1em;
+         padding: 1em;
+         margin-bottom: 1em;
+         display: flex;
+         flex-direction: row;
+         align-items: center;
+         justify-content: center;
+         width: 100%;
+
+         .positionsImage {
+            background-color: yellow;
+            width: 100%;
+            height: 12em;
+         }
+
+         .positionsText {
+            background-color: purple;
+            width: 100%;
+            height: 12em;
+         }
+      }
+
+      .rowSkills {
+         background-color: $textBoxBackground;
+         border-radius: 1em;
+         padding: 1em;
+         margin-bottom: 1em;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         width: 100%;
+
+
+         .rowImages {
+            background-color: green;
+            padding: 1em;
+            margin-bottom: 1em;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+
+            .skillImage1 {
+               background-color: lightskyblue;
+               width: 100%;
+               height: 12em;
+            }
+
+            .skillImage2 {
+               background-color: orangered;
+               width: 100%;
+               height: 12em;
+            }
+         }
+
+         .skillsText {
+            background-color: greenyellow;
+            width: 100%;
+            height: 6em;
+         }
+      }
+
+      
+      .rowComingSoon {
+         background-color: $textBoxBackground;
+         border-radius: 1em;
+         padding: 1em;
+         margin-bottom: 1em;
+         display: flex;
+         flex-direction: column;
+         align-items: center;
+         justify-content: center;
+         width: 100%;
+         
+         .comingSoonText {
+            background-color: red;
+            width: 100%;
+            height: 6em;
+         }
+
+         .rowImages {
+            background-color: green;
+            padding: 1em;
+            margin-bottom: 1em;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+
+            .companiesImage {
+               background-color: blue;
+               width: 100%;
+               height: 12em;
+            }
+
+            .usersImage {
+               background-color: salmon;
+               width: 100%;
+               height: 12em;
+            }
+         }
+
+      }
+
+
+      @media(max-width: 768px) {
+         .rowPositions {
+            flex-wrap: wrap;
+         }
+         .rowSkills {
+            .rowImages {
+               flex-wrap: wrap;
+            }
+         }
+         .rowComingSoon {
+            .rowImages {
+               flex-wrap: wrap;
+            }
+         }
+      }
+   }
 }
