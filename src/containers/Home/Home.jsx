@@ -3,6 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.scss"
 import joinUsImg from "../../img/joinUsImg.png"
+import shakeHands from "../../img/shakeHands.jpg"
 
 const Home = () => {
    const navigate = useNavigate()
@@ -11,9 +12,13 @@ const Home = () => {
    const goToRegister = () => {
       navigate('/register')
    }
-   
+
    const goToLogIn = () => {
       navigate('/login')
+   }
+
+   const goToPositions = () => {
+      navigate('/positions')
    }
 
    return (
@@ -33,10 +38,12 @@ const Home = () => {
             </div>
             <div className="rowPositions">
                <div className="positionsImage">
-                  <img className="homeImg" src="" alt="Jobs image" />
+                  <img className="homeImg" src={shakeHands} alt="Jobs image" />
                </div>
                <div className="positionsText">
-                  <p>Positions text</p>
+                  <h2>Search for your dream job</h2>
+                  <p>Find the job that suits best your profile, preferences and lifestyle. Never had it been so easy!</p>
+                  <button id="largeButton" onClick={goToPositions}>Search job offers</button>
                </div>
             </div>
             <div className="rowSkills">
