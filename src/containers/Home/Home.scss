@@ -10,7 +10,6 @@
    justify-content: flex-start;
 
    .mainBox {
-      background-color: $containerBackground;
       width: 90vw;
       min-width: 400px;
       margin-top: 1em;
@@ -32,15 +31,50 @@
          width: 100%;
 
          .joinUsImage {
-            background-color: lightgreen;
-            width: 100%;
-            height: 12em;
+            display: flex;
+            justify-content: center;
+
+            .homeImg {
+               background-color: blue;
+               width: 90%;
+               height: auto;
+            }
          }
 
          .joinUsText {
-            background-color: red;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             width: 100%;
-            height: 12em;
+
+            h1 {
+               text-align: center;
+               font-size: 2em;
+               color: brown
+            }
+
+            .buttonsContainer {
+               display: flex;
+               flex-direction: row;
+               flex-wrap: wrap;
+               justify-content: center;
+
+               #largeButton {
+                  background-color: $buttonBackground;
+                  color: black;
+                  border: solid 1px $borderThin;
+                  width: fit-content;
+                  padding: 0.1em 1em;
+                  margin: 0.2em 2em;
+                  border-radius: 1em;
+                  font-size: 1.6em;
+               }
+
+               #largeButton:hover {
+                  background-color: $buttonBackgroundHover;
+               }
+            }
          }
       }
 
@@ -110,7 +144,6 @@
          }
       }
 
-      
       .rowComingSoon {
          background-color: $textBoxBackground;
          border-radius: 1em;
@@ -121,7 +154,7 @@
          align-items: center;
          justify-content: center;
          width: 100%;
-         
+
          .comingSoonText {
             background-color: red;
             width: 100%;
@@ -150,19 +183,19 @@
                height: 12em;
             }
          }
-
       }
-
 
       @media(max-width: 768px) {
          .rowPositions {
             flex-wrap: wrap;
          }
+
          .rowSkills {
             .rowImages {
                flex-wrap: wrap;
             }
          }
+
          .rowComingSoon {
             .rowImages {
                flex-wrap: wrap;

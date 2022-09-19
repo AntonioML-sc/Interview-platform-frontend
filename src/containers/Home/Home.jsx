@@ -2,19 +2,33 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.scss"
+import joinUsImg from "../../img/joinUsImg.png"
 
 const Home = () => {
-   const navigate = useNavigate
+   const navigate = useNavigate()
+
+   // navigation
+   const goToRegister = () => {
+      navigate('/register')
+   }
+   
+   const goToLogIn = () => {
+      navigate('/login')
+   }
 
    return (
       <div id="Home">
          <div className="mainBox">
             <div className="rowJoinUs">
                <div className="joinUsImage">
-                  <img className="homeImg" src="" alt="Join us image" />
+                  <img className="homeImg" src={joinUsImg} alt="Join us image" />
                </div>
                <div className="joinUsText">
-                  <p>JoinUs text</p>
+                  <h1>Join the definitive professional comunity</h1>
+                  <div className="buttonsContainer">
+                     <button id="largeButton" onClick={goToRegister}>Register now</button>
+                     <button id="largeButton" onClick={goToLogIn}>Log In</button>
+                  </div>
                </div>
             </div>
             <div className="rowPositions">
