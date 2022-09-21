@@ -4,13 +4,13 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { evalField } from "../../../utils";
-import { refreshUserData, userData } from "../../User/userSlice";
-import { deleteSkill, selectSkill, setSkill, setSkillList, updateSkill } from "../skillSlice";
+import { userData } from "../../User/userSlice";
+import { clear, deleteSkill, selectSkillState, updateSkill } from "../skillSlice";
 import './UpdateSkill.scss'
 
 const UpdateSkill = () => {
    const userInfo = useSelector(userData)
-   const skillInfo = useSelector(selectSkill)
+   const skillInfo = useSelector(selectSkillState)
    const navigate = useNavigate()
    const dispatch = useDispatch()
 
@@ -23,17 +23,17 @@ const UpdateSkill = () => {
    useEffect(() => {
       const checkUser = () => {
          return (
-            (userInfo.data.id == skillInfo.pivot.user_id) && (skillInfo.pivot.creator)
+            (userInfo.data.id == skillInfo.skill.pivot.user_id) && (skillInfo.skill.pivot.creator)
          )
       }
-      if (!userInfo?.data || skillInfo == "" || !checkUser()) {
+      if (!userInfo?.data || skillInfo.skill == "" || !checkUser()) {
          navigate('/')
       } else {
          setSkillData({
             ...skillData,
-            id: skillInfo.id,
-            title: skillInfo.title,
-            description: skillInfo.description
+            id: skillInfo.skill.id,
+            title: skillInfo.skill.title,
+            description: skillInfo.skill.description
          })
       }
    }, [])
@@ -77,10 +77,10 @@ const UpdateSkill = () => {
             setError(false, '')
             const userToken = userInfo?.token
             dispatch(updateSkill(skillData.id, skillData.title, skillData.description, userToken))
-            dispatch(setSkill(""))
-            dispatch(setSkillList([]))
-            dispatch(refreshUserData())
-            setTimeout(() => navigate("/skills"), 1000)
+            setTimeout(() => {
+               dispatch(clear())
+               navigate("/")
+            }, 1000)
          }
       }
    }
@@ -91,10 +91,10 @@ const UpdateSkill = () => {
       const userToken = userInfo?.token
       setError(false, '')
       dispatch(deleteSkill(skillData.id, userToken))
-      dispatch(setSkill(""))
-      dispatch(setSkillList([]))
-      dispatch(refreshUserData())
-      setTimeout(() => navigate("/skills"), 1000)
+      setTimeout(() => {
+         dispatch(clear())
+         navigate("/")
+      }, 1000)
    }
 
    return (

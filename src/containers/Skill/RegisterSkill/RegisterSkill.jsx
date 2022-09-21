@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { evalField } from "../../../utils";
-import { refreshUserData, userData } from "../../User/userSlice";
+import { userData } from "../../User/userSlice";
 import { clear, registerSkill, selectSkillState } from "../skillSlice";
 import './RegisterSkill.scss'
 
@@ -52,7 +52,7 @@ const RegisterSkill = () => {
          ['description', register.description, 'Invalid description format']
       ]
 
-      // apply evals and register position if everything is ok
+      // apply evals and register skill if everything is ok
       for (let index in validations) {
          if (!evalField(validations[index][0], validations[index][1])) {
             setRegisterError(true, validations[index][2])
@@ -61,7 +61,6 @@ const RegisterSkill = () => {
             setRegisterError(false, '')
             const userToken = userInfo?.token
             dispatch(registerSkill(register.title, register.description, userToken))
-            dispatch(refreshUserData())
             setTimeout(() => {
                navigate("/")
                dispatch(clear())

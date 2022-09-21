@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { refreshUserData } from "../User/userSlice";
 
 export const skillSlice = createSlice({
    name: "skill",
@@ -38,9 +39,10 @@ export const skillSlice = createSlice({
             errorMessage: ''
          }
       },
-      clear: (state, action) => {
+      clear: () => {
          return {
-            ...state.initialState
+            skill: "",
+            skillList: []
          }
       },
       logError: (state, action) => {
@@ -68,6 +70,7 @@ export const registerSkill = (title, description, token) => async (dispatch) => 
       let response = skill;
       if (response.status === 201 || response.status === 200) {
          dispatch(register());
+         dispatch(refreshUserData())
       }
    } catch (error) {
       dispatch(logError(error));
@@ -88,6 +91,7 @@ export const updateSkill = (id, title, description, token) => async (dispatch) =
       let response = skill;
       if (response.status === 200) {
          dispatch(update());
+         dispatch(refreshUserData())
       }
    } catch (error) {
       dispatch(logError(error));
@@ -104,6 +108,7 @@ export const deleteSkill = (id, token) => async (dispatch) => {
       let response = skill;
       if (response.status === 200 || response.status === 204) {
          dispatch(eliminate());
+         dispatch(refreshUserData())
       }
    } catch (error) {
       dispatch(logError(error));
