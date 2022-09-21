@@ -241,9 +241,9 @@ const CreatePosition = () => {
 
                   <div className="otherSkillContainer">
                      <div className="searchBar">
-                        <form className="searchBarForm">
+                        <div className="searchBarForm">
                            <input className="inputBox" type="text" name="searchWord" onChange={handleChange} placeholder=" Search"></input>
-                        </form>
+                        </div>
                      </div>
                      <div className="otherSkillList">
                         <OtherSkillList />
