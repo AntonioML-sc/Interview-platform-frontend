@@ -50,6 +50,10 @@ const evalMark = (st) => {
     return ((/^[\d]{2}$/.test(st)) && (+st <= 10) && (+st >= 0));
 }
 
+const evalRole = (st) => {
+    return (st == 'applicant' || st == 'recruiter')
+}
+
 const evalField = (key, value) => {
     switch (key) {
         case 'last_name': return evalName(value);
@@ -70,6 +74,7 @@ const evalField = (key, value) => {
         case 'mode': return evalTitle(value);
         case 'name': return evalName(value);
         case 'one_to_ten': return evalOneToTenNumber(value);
+        case 'role': return evalRole(value); 
         default: return false;
     }
 }

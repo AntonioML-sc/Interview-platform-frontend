@@ -47,6 +47,7 @@ const Register = (props) => {
 
       // form inputs to validate
       const validations = [
+         ['role', register.role, 'You must select a profile type'],
          ['last_name', register.lastName, 'Introduce a valid last name'],
          ['first_name', register.firstName, 'Introduce a valid first name'],
          ['email', register.email, 'Invalid email format'],
@@ -75,7 +76,8 @@ const Register = (props) => {
             <form className="registerForm" onSubmit={userRegister}>
                <div className="registerItem">
                   <label className="registerLabel">Profile type</label>
-                  <select className="registerInput" onChange={handleInput} name="role">
+                  <select className="registerInput" defaultValue={"undefined"} onChange={handleInput} name="role">
+                     <option value="undefined" disabled>Choose a profile</option>
                      <option value="applicant">Applicant</option>
                      <option value="recruiter">Recruiter</option>
                   </select>
