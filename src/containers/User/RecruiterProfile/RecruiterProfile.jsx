@@ -153,7 +153,7 @@ const RecruiterProfile = () => {
                      <p className="userInfoHeading">Examinee: {test.users[0].first_name} {test.users[0].last_name} | {test.users[0].email}</p>
                   }
                   {test.users[1].id != userInfo.data.id &&
-                     <p className="userInfoHeading">Examinee: {test.users[0].first_name} {test.users[0].last_name} | {test.users[0].email}</p>
+                     <p className="userInfoHeading">Examinee: {test.users[1].first_name} {test.users[1].last_name} | {test.users[1].email}</p>
                   }
                   <p className="userInfoText">Date: {new Date(test.date).toLocaleDateString()}</p>
                   <p className="userInfoText">Time: {new Date(test.date).toLocaleTimeString()}</p>
