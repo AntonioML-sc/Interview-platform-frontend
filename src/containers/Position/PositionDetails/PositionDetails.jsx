@@ -5,7 +5,7 @@ import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { selectPosition, setPosition } from "../positionsSlice"
-import { userData } from "../../User/userSlice"
+import { refreshUserData, userData } from "../../User/userSlice"
 import { setUserId } from "../../SkillTest/skillTestSlice"
 import "./PositionDetails.scss"
 
@@ -79,6 +79,8 @@ const PositionDetails = () => {
                ...data,
                lastAction: "applied"
             })
+         }).then(resp => {
+            dispatch(refreshUserData())
          }).catch(error => {
             console.log(error)
          })
