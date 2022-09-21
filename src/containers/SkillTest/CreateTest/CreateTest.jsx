@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { evalField } from "../../../utils"
-import { refreshUserData, userData } from "../../User/userSlice"
+import { userData } from "../../User/userSlice"
 import { createTest, selectUserId } from "../skillTestSlice"
 import "./CreateTest.scss"
 
@@ -115,12 +115,10 @@ const CreateTest = () => {
                skills: skillIdsArray
             }
             dispatch(createTest(body, userToken))
-            dispatch(refreshUserData())
             setTimeout(() => navigate("/"), 1000)
          }
       }
    }
-
 
    // handler for skill search
    const handleChange = (event) => {

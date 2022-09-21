@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { evalField } from "../../../utils"
-import { refreshUserData, userData } from "../../User/userSlice"
+import { userData } from "../../User/userSlice"
 import { gradeTest, selectTest } from "../skillTestSlice"
 import "./GradeTest.scss"
 
@@ -58,7 +58,6 @@ const GradeTest = () => {
             const userToken = userInfo?.token
             const body = {skills: Object.entries(register).map(value => {return {id: value[0], mark: value[1]}})}
             dispatch(gradeTest(testInfo.id, body, userToken))
-            dispatch(refreshUserData())
             setTimeout(() => navigate("/"), 1000)
          }
       }
