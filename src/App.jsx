@@ -42,6 +42,7 @@ function App() {
                <Route path='/skill-update' element={<UpdateSkill />} />
                <Route path='/test-create' element={<CreateTest />} />
                <Route path='/test-grade' element={<GradeTest />} />
+               <Route path='*' element={<Home />} />
             </Routes>
             <Footer />
          </BrowserRouter>
